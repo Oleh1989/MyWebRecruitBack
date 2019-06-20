@@ -19,7 +19,7 @@ namespace MyWebRecruit.Data.Contexts
         public DbSet<Client> Clients { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
-        public DbSet<CV> CVs { get; set; }
+        public DbSet<Cv> CVs { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Journal> Journals { get; set; }
 
