@@ -11,6 +11,8 @@ namespace MyWebRecruit.Data.Contexts
 {
     public class MyWebRecruitContext : DbContext
     {
+
+        //private const connectionString = "";
         public MyWebRecruitContext(DbContextOptions<MyWebRecruitContext> options) : base(options)
         {
             Database.EnsureCreated();
@@ -29,6 +31,5 @@ namespace MyWebRecruit.Data.Contexts
             modelBuilder.Entity<Candidate>().HasKey(c => c.CandidateID);
 
         }
-
     }
 }
