@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Pay_Method] (
+    [PAY_METHOD_ID]    INT           NOT NULL,
+    [PAY_METHOD_DESCR] NVARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_Pay_Method] PRIMARY KEY CLUSTERED ([PAY_METHOD_ID] ASC)
+);
+

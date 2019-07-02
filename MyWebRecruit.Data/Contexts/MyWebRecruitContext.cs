@@ -29,7 +29,6 @@ namespace MyWebRecruit.Data.Contexts
         protected override void OnModelCreating (ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Candidate>().HasKey(c => c.CandidateID);
-
         }
     }
 }

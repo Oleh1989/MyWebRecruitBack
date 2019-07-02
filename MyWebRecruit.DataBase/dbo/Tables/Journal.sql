@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[Journal] (
+    [JOURNAL_ID]  INT            NOT NULL,
+    [ENTITY_ID]   INT            NOT NULL,
+    [DESCRIPTION] NVARCHAR (500) NOT NULL,
+    [DT_LOGGED]   DATETIME       NOT NULL,
+    CONSTRAINT [PK_Journal] PRIMARY KEY CLUSTERED ([JOURNAL_ID] ASC),
+    CONSTRAINT [FK_Journal_User] FOREIGN KEY ([ENTITY_ID]) REFERENCES [dbo].[User] ([USER_ID])
+);
+

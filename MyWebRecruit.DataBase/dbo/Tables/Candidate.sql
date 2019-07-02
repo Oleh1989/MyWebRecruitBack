@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[Candidate] (
+    [CANDIDATE_ID] INT            NOT NULL,
+    [FIRST_NAME]   NVARCHAR (50)  NOT NULL,
+    [LAST_NAME]    NVARCHAR (50)  NOT NULL,
+    [MIDDLE_NAME]  NVARCHAR (50)  NULL,
+    [EMAIL]        NVARCHAR (255) NOT NULL,
+    [TEL_NO]       NVARCHAR (20)  NOT NULL,
+    [ALTER_TEL_NO] NVARCHAR (20)  NULL,
+    [DISTURB_YN]   TINYINT        NULL,
+    [FACEBOOK]     NVARCHAR (100) NULL,
+    [LINKEDIN]     NVARCHAR (100) NULL,
+    [SKYPE]        NVARCHAR (100) NULL,
+    [DOB]          DATE           NULL,
+    [AGE]          INT            NULL,
+    [CREATED_BY]   INT            NOT NULL,
+    CONSTRAINT [PK_Candidate] PRIMARY KEY CLUSTERED ([CANDIDATE_ID] ASC),
+    CONSTRAINT [FK_Candidate_User] FOREIGN KEY ([CREATED_BY]) REFERENCES [dbo].[User] ([USER_ID])
+);
+

@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Assig_Type] (
+    [ASSIG_TYPE_ID]    INT           NOT NULL,
+    [ASSIG_TYPE_DESCR] NVARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_Assig_Type] PRIMARY KEY CLUSTERED ([ASSIG_TYPE_ID] ASC)
+);
+
