@@ -16,19 +16,12 @@ namespace MyWebRecruit.Data.Contexts
         public MyWebRecruitContext(DbContextOptions<MyWebRecruitContext> options) : base(options)
         {
             Database.EnsureCreated();
-        }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Assignment> Assignments { get; set; }
-        public DbSet<Cv> CVs { get; set; }
-        public DbSet<Job> Jobs { get; set; }
-        public DbSet<Journal> Journals { get; set; }
+        }       
 
 
         protected override void OnModelCreating (ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Candidate>().HasKey(c => c.CandidateID);
+            
         }
     }
 }
