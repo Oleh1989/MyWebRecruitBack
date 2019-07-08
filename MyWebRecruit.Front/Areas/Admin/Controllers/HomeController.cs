@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyWebRecruit.Front.Areas.Public.Controllers
+namespace MyWebRecruit.Front.Areas.Admin.Controllers
 {
-    [Area("Public")]
+    [Area("Admin")]
     public class HomeController : Controller
     {
         public IActionResult Index()
