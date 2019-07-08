@@ -16,8 +16,7 @@ namespace MyWebRecruit.Data.Contexts
         public MyWebRecruitContext(DbContextOptions<MyWebRecruitContext> options) : base(options)
         {
             Database.EnsureCreated();
-        }       
-
+        }
 
         protected override void OnModelCreating (ModelBuilder modelBuilder)
         {
