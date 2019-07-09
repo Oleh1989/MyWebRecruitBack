@@ -8,6 +8,7 @@
     [REASON_LEAVE] NVARCHAR (100) NULL,
     [CAND_ID]      INT            NOT NULL,
     [JOB_ID]       INT            NOT NULL,
+    [IS_DELETED] BIT NOT NULL, 
     CONSTRAINT [PK_Assignment] PRIMARY KEY CLUSTERED ([ASSIG_ID] ASC),
     CONSTRAINT [FK_Assignment_Assig_Type] FOREIGN KEY ([ASSIG_TYPE]) REFERENCES [dbo].[Assig_Type] ([ASSIG_TYPE_ID]),
     CONSTRAINT [FK_Assignment_Candidate] FOREIGN KEY ([CAND_ID]) REFERENCES [dbo].[Candidate] ([CANDIDATE_ID]),

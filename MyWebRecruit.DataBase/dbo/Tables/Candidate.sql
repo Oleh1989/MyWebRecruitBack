@@ -13,6 +13,7 @@
     [DOB]          DATE           NULL,
     [AGE]          INT            NULL,
     [CREATED_BY]   INT            NOT NULL,
+    [IS_DELETED] BIT NOT NULL, 
     CONSTRAINT [PK_Candidate] PRIMARY KEY CLUSTERED ([CANDIDATE_ID] ASC),
     CONSTRAINT [FK_Candidate_User] FOREIGN KEY ([CREATED_BY]) REFERENCES [dbo].[User] ([USER_ID])
 );

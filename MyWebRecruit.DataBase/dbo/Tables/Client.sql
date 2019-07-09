@@ -8,6 +8,7 @@
     [COUNTRY]       INT            NULL,
     [TEL_NO]        NVARCHAR (20)  NOT NULL,
     [CREATED_BY]    INT            NOT NULL,
+    [IS_DELETED] BIT NOT NULL, 
     CONSTRAINT [PK_Client] PRIMARY KEY CLUSTERED ([CLIENT_ID] ASC),
     CONSTRAINT [FK_Client_Country] FOREIGN KEY ([COUNTRY]) REFERENCES [dbo].[Country] ([COUNTRY_ID]),
     CONSTRAINT [FK_Client_User] FOREIGN KEY ([CREATED_BY]) REFERENCES [dbo].[User] ([USER_ID])
