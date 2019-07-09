@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using MyWebRecruit.Data.Contexts;
+using MyWebRecruit.Data.MyWebRecruit.Data.Entities;
 
 namespace MyWebRecruit
 {
@@ -28,7 +28,7 @@ namespace MyWebRecruit
         public void ConfigureServices(IServiceCollection services)
         {            
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<MyWebRecruitContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<MyWebRecruitDataBaseContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
             // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

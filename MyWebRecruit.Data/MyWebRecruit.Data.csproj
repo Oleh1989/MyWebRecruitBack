@@ -16,9 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Configuration\" />
-    <Folder Include="Entities\" />
     <Folder Include="Repositories\" />
-    <Folder Include="UnitOfWorks\" />
   </ItemGroup>
 
 </Project>
