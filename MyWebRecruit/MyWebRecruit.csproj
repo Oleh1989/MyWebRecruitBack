@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyWebRecruit.Contracts\MyWebRecruit.Contracts.csproj" />
+    <ProjectReference Include="..\MyWebRecruit.DataBase\MyWebRecruit.DataBase.sqlproj" />
     <ProjectReference Include="..\MyWebRecruit.Data\MyWebRecruit.Data.csproj" />
     <ProjectReference Include="..\MyWebRecruit.Domain\MyWebRecruit.Domain.csproj" />
   </ItemGroup>
