@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
-    public partial class XClientContact
+    public partial class XClientContact : IIdentified
     {
-        public int UniqueId { get; set; }
+        // IIdentified interface
+        public int Id { get; set; }
+
         public int ClientId { get; set; }
         public int ContactId { get; set; }
 

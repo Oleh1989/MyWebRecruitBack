@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
-    public partial class JobFinancial
+    public partial class JobFinancial : IIdentified
     {
-        public int JobId { get; set; }
+        // IIdentified interface
+        public int Id { get; set; }
+
         public string JobCurrency { get; set; }
         public string JobStatus { get; set; }
         public DateTime? StartDt { get; set; }

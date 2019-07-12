@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
-    public partial class Contact
+    public partial class Contact : IIdentified, IDeletable
     {
         public Contact()
         {
@@ -11,7 +11,9 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
             XJobContact = new HashSet<XJobContact>();
         }
 
-        public int ContactId { get; set; }
+        // IIdentified interface
+        public int Id { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string TelNo { get; set; }
@@ -19,6 +21,9 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
         public byte? DisturbYn { get; set; }
         public string Department { get; set; }
         public string JobTitle { get; set; }
+
+        // IDeletable interface
+        public bool IsDeleted { get; set; }
 
         public virtual ICollection<XClientContact> XClientContact { get; set; }
         public virtual ICollection<XJobContact> XJobContact { get; set; }
