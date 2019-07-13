@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
-    public partial class Assignment
+    public partial class Assignment : IIdentified, IDeletable
     {
-        public int AssigId { get; set; }
+        // IIdentified interface
+        public int Id { get; set; }
+
         public DateTime StartDt { get; set; }
         public DateTime? EndDt { get; set; }
         public decimal Salary { get; set; }
@@ -14,6 +16,8 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
         public string ReasonLeave { get; set; }
         public int CandId { get; set; }
         public int JobId { get; set; }
+
+        // IDeletable interface
         public bool IsDeleted { get; set; }
 
         public virtual AssigType AssigTypeNavigation { get; set; }

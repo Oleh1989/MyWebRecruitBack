@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
-    public partial class Candidate
+    public partial class Candidate : IIdentified, IDeletable
     {
         public Candidate()
         {
@@ -11,7 +11,9 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
             Cv = new HashSet<Cv>();
         }
 
-        public int CandidateId { get; set; }
+        // IIdentified interface
+        public int Id { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
@@ -25,6 +27,8 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
         public DateTime? Dob { get; set; }
         public int? Age { get; set; }
         public int CreatedBy { get; set; }
+
+        // IDeletable interface
         public bool IsDeleted { get; set; }
 
         public virtual User CreatedByNavigation { get; set; }
