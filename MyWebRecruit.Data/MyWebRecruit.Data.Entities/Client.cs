@@ -20,7 +20,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
         public string AddressLine { get; set; }
         public string AddressCity { get; set; }
         public string AddressIndex { get; set; }
-        public int? Country { get; set; }
+        public int? CountryId { get; set; }
 
         public string TelNo { get; set; }
         public int CreatedBy { get; set; }

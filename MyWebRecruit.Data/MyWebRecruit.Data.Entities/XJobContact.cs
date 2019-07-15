@@ -6,7 +6,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
     public partial class XJobContact : IIdentified
     {
         // IIdentified interface
-        public int UniqueId { get; set; }
+        public int Id { get; set; }
         public int JobId { get; set; }
         public int ContactId { get; set; }
 

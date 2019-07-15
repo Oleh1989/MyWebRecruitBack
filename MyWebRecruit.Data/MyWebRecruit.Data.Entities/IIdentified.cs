@@ -6,6 +6,6 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
     interface IIdentified
     {
-        public int Id { get; set; }
+        int Id { get; set; }
     }
 }

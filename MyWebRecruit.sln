@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit", "MyWebRecruit\MyWebRecruit.csproj", "{A12BED42-4BC5-4370-83CF-9AA88C666F16}"
 EndProject
@@ -15,7 +15,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MyWebRecruit.DataBase", "My
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Front", "MyWebRecruit.Front\MyWebRecruit.Front.csproj", "{21DE7C2D-6A70-4F6C-9635-87E60AB45161}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebRecruit.ViewModels", "MyWebRecruit.ViewModels\MyWebRecruit.ViewModels.csproj", "{561FEDBD-331B-47BC-B5FF-324C124658A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.ViewModels", "MyWebRecruit.ViewModels\MyWebRecruit.ViewModels.csproj", "{561FEDBD-331B-47BC-B5FF-324C124658A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

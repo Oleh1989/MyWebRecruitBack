@@ -6,6 +6,6 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
     public interface IDeletable
     {
-        public bool IsDeleted { get; set; }
+        bool IsDeleted { get; set; }
     }
 }
