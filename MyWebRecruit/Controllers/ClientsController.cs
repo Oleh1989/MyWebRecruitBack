@@ -9,37 +9,37 @@ namespace MyWebRecruit.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ClientsController : ControllerBase
     {
-        // GET api/values
+        // GET api/clients
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "Client1", "Client2" };
         }
 
-        // GET api/values/5
+        // GET api/clients/id
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            return "ClientId";
         }
 
-        // POST api/values
+        // POST api/clients
         [HttpPost]
         public void Post([FromBody] string value)
         {
 
         }
 
-        // PUT api/values/5
+        // PUT api/clients/id
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
 
         }
 
-        // DELETE api/values/5
+        // DELETE api/clients/id
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

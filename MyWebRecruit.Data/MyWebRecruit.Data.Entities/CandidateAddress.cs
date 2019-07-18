@@ -3,9 +3,12 @@ using System.Collections.Generic;
 
 namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
-    public partial class CandidateAddress
+    public partial class CandidateAddress : IIdentified, IAddress
     {
-        public int CandidateId { get; set; }
+        // IIdentified interface
+        public int Id { get; set; }
+
+        // IAddress interface
         public string AddressLine { get; set; }
         public string AddressCity { get; set; }
         public string AddressIndex { get; set; }

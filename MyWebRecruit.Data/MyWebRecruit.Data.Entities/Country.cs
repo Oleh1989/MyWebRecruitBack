@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
-    public partial class Country
+    public partial class Country : IIdentified, IDeletable
     {
         public Country()
         {
@@ -12,8 +12,12 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
             JobGeneral = new HashSet<JobGeneral>();
         }
 
-        public int CountryId { get; set; }
+        //IIdentified interface
+        public int Id { get; set; }
+
         public string CountryName { get; set; }
+
+        // IDeletable interface
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<CandidateAddress> CandidateAddress { get; set; }
