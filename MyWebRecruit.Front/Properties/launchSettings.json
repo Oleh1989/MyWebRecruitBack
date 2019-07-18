@@ -1,16 +1,21 @@
-﻿{
+{
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "https://mywebrecruit.local",
+      "sslPort": 0
+    },
     "iisExpress": {
-      "applicationUrl": "http://localhost:60677",
-      "sslPort": 44323
+      "applicationUrl": "http://localhost:51793/",
+      "sslPort": 0
     }
   },
   "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
+    "IIS": {
+      "commandName": "IIS",
       "launchBrowser": true,
+      "launchUrl": "https://mywebrecruit.local",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -18,10 +23,10 @@
     "MyWebRecruit.Front": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }
   }
 }
