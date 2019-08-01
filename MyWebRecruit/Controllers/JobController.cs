@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyWebRecruit.Domain.Services;
 
 namespace MyWebRecruit.Controllers
 {
@@ -11,11 +12,14 @@ namespace MyWebRecruit.Controllers
     [ApiController]
     public class JobController : ControllerBase
     {
+        private readonly IJobService _jobService
+            = new JobService();
+
         // GET api/jobs
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "Job1", "Job2" };
+            return _jobService.GetJobs();
         }
 
         // GET api/jobs/id

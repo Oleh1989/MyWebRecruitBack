@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit", "MyWebRecruit\MyWebRecruit.csproj", "{A12BED42-4BC5-4370-83CF-9AA88C666F16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.API", "MyWebRecruit\MyWebRecruit.API.csproj", "{A12BED42-4BC5-4370-83CF-9AA88C666F16}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Domain", "MyWebRecruit.Domain\MyWebRecruit.Domain.csproj", "{452DEB7F-230F-403D-84F2-94E75B93698E}"
 EndProject
@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Front", "MyWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.ViewModels", "MyWebRecruit.ViewModels\MyWebRecruit.ViewModels.csproj", "{561FEDBD-331B-47BC-B5FF-324C124658A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebRecruit.Domain.Test", "ServiceTest\MyWebRecruit.Domain.Test.csproj", "{39F22C58-F20E-425A-8D9B-61C24724BA36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Domain.Test", "ServiceTest\MyWebRecruit.Domain.Test.csproj", "{39F22C58-F20E-425A-8D9B-61C24724BA36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
