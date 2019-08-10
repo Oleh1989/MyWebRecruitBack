@@ -1,14 +1,22 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.Configuration;
+using MyWebRecruit;
 
 namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
     public partial class MyWebRecruitDataBaseContext : DbContext
-    {
-        private string connectionString = "Server=.\\SQLExpress; Trusted_Connection=true; Database=MyWebRecruit.DataBase; MultipleActiveResultSets=true";
-        public MyWebRecruitDataBaseContext()
+    {        
+        private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyWebRecruit.DataBase;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+
+        public MyWebRecruitDataBaseContext(string connectionSring)
+        {            
+        }
+
+        public static string GetConnectionString()
         {
+            return Startup.ConnectionString;
         }
 
         public MyWebRecruitDataBaseContext(DbContextOptions<MyWebRecruitDataBaseContext> options)
@@ -37,8 +45,9 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
             
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(connectionString);
+                //optionsBuilder.UseSqlServer(connectionString);
+                GetConnectionString();
+                
             }
         }
 
@@ -50,7 +59,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
             {
                 entity.ToTable("Assig_Type");
 
-                entity.Property(e => e.AssigTypeId)
+                entity.Property(e => e.Id)
                     .HasColumnName("ASSIG_TYPE_ID")
                     .ValueGeneratedNever();
 
@@ -62,9 +71,9 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
             modelBuilder.Entity<Assignment>(entity =>
             {
-                entity.HasKey(e => e.AssigId);
+                entity.HasKey(e => e.Id);
 
-                entity.Property(e => e.AssigId)
+                entity.Property(e => e.Id)
                     .HasColumnName("ASSIG_ID")
                     .ValueGeneratedNever();
 
@@ -116,7 +125,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
             modelBuilder.Entity<Candidate>(entity =>
             {
-                entity.Property(e => e.CandidateId)
+                entity.Property(e => e.Id)
                     .HasColumnName("CANDIDATE_ID")
                     .ValueGeneratedNever();
 
@@ -179,11 +188,11 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
             modelBuilder.Entity<CandidateAddress>(entity =>
             {
-                entity.HasKey(e => e.CandidateId);
+                entity.HasKey(e => e.Id);
 
                 entity.ToTable("Candidate_Address");
 
-                entity.Property(e => e.CandidateId)
+                entity.Property(e => e.Id)
                     .HasColumnName("CANDIDATE_ID")
                     .ValueGeneratedNever();
 
@@ -209,7 +218,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
             modelBuilder.Entity<Client>(entity =>
             {
-                entity.Property(e => e.ClientId)
+                entity.Property(e => e.Id)
                     .HasColumnName("CLIENT_ID")
                     .ValueGeneratedNever();
 
@@ -225,7 +234,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
                     .HasColumnName("ADDRESS_LINE")
                     .HasMaxLength(200);
 
-                entity.Property(e => e.Country).HasColumnName("COUNTRY");
+                entity.Property(e => e.CountryId).HasColumnName("COUNTRY");
 
                 entity.Property(e => e.CreatedBy).HasColumnName("CREATED_BY");
 
@@ -245,7 +254,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
                 entity.HasOne(d => d.CountryNavigation)
                     .WithMany(p => p.Client)
-                    .HasForeignKey(d => d.Country)
+                    .HasForeignKey(d => d.CountryId)
                     .HasConstraintName("FK_Client_Country");
 
                 entity.HasOne(d => d.CreatedByNavigation)
@@ -257,7 +266,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
             modelBuilder.Entity<Contact>(entity =>
             {
-                entity.Property(e => e.ContactId)
+                entity.Property(e => e.Id)
                     .HasColumnName("CONTACT_ID")
                     .ValueGeneratedNever();
 
@@ -294,7 +303,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
             modelBuilder.Entity<Country>(entity =>
             {
-                entity.Property(e => e.CountryId)
+                entity.Property(e => e.Id)
                     .HasColumnName("COUNTRY_ID")
                     .ValueGeneratedNever();
 
@@ -308,7 +317,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
             {
                 entity.ToTable("CV");
 
-                entity.Property(e => e.CvId)
+                entity.Property(e => e.Id)
                     .HasColumnName("CV_ID")
                     .ValueGeneratedNever();
 
@@ -328,11 +337,11 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
             modelBuilder.Entity<JobFinancial>(entity =>
             {
-                entity.HasKey(e => e.JobId);
+                entity.HasKey(e => e.Id);
 
                 entity.ToTable("Job_Financial");
 
-                entity.Property(e => e.JobId)
+                entity.Property(e => e.Id)
                     .HasColumnName("JOB_ID")
                     .ValueGeneratedNever();
 
@@ -369,7 +378,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
                 entity.HasOne(d => d.Job)
                     .WithOne(p => p.JobFinancial)
-                    .HasForeignKey<JobFinancial>(d => d.JobId)
+                    .HasForeignKey<JobFinancial>(d => d.Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Job_Financial_Job_General");
 
@@ -381,11 +390,11 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
             modelBuilder.Entity<JobGeneral>(entity =>
             {
-                entity.HasKey(e => e.JobId);
+                entity.HasKey(e => e.Id);
 
                 entity.ToTable("Job_General");
 
-                entity.Property(e => e.JobId)
+                entity.Property(e => e.Id)
                     .HasColumnName("JOB_ID")
                     .ValueGeneratedNever();
 
@@ -401,7 +410,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
                     .HasColumnName("ADDRESS_LINE")
                     .HasMaxLength(100);
 
-                entity.Property(e => e.Country).HasColumnName("COUNTRY");
+                entity.Property(e => e.CountryId).HasColumnName("COUNTRY");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -410,13 +419,13 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
                 entity.HasOne(d => d.CountryNavigation)
                     .WithMany(p => p.JobGeneral)
-                    .HasForeignKey(d => d.Country)
+                    .HasForeignKey(d => d.CountryId)
                     .HasConstraintName("FK_Job_General_Country");
             });
 
             modelBuilder.Entity<Journal>(entity =>
             {
-                entity.Property(e => e.JournalId)
+                entity.Property(e => e.Id)
                     .HasColumnName("JOURNAL_ID")
                     .ValueGeneratedNever();
 
@@ -442,7 +451,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
             {
                 entity.ToTable("Pay_Method");
 
-                entity.Property(e => e.PayMethodId)
+                entity.Property(e => e.Id)
                     .HasColumnName("PAY_METHOD_ID")
                     .ValueGeneratedNever();
 
@@ -454,7 +463,7 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.UserId)
+                entity.Property(e => e.Id)
                     .HasColumnName("USER_ID")
                     .ValueGeneratedNever();
 
@@ -482,11 +491,11 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
             modelBuilder.Entity<XClientContact>(entity =>
             {
-                entity.HasKey(e => e.UniqueId);
+                entity.HasKey(e => e.Id);
 
                 entity.ToTable("X_Client_Contact");
 
-                entity.Property(e => e.UniqueId)
+                entity.Property(e => e.Id)
                     .HasColumnName("UNIQUE_ID")
                     .ValueGeneratedNever();
 
@@ -509,11 +518,11 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
             modelBuilder.Entity<XJobContact>(entity =>
             {
-                entity.HasKey(e => e.UniqueId);
+                entity.HasKey(e => e.Id);
 
                 entity.ToTable("X_Job_Contact");
 
-                entity.Property(e => e.UniqueId)
+                entity.Property(e => e.Id)
                     .HasColumnName("UNIQUE_ID")
                     .ValueGeneratedNever();
 
