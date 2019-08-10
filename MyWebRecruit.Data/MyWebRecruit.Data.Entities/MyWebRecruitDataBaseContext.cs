@@ -1,19 +1,22 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.Configuration;
+using MyWebRecruit;
 
 namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
     public partial class MyWebRecruitDataBaseContext : DbContext
-    {
-        // Connection string to SQL Express
-        //private string connectionString = "Server=.\\SQLExpress; Trusted_Connection=true; Database=MyWebRecruit.DataBase; MultipleActiveResultSets=true";
-
-        // Connection string to local DB
+    {        
         private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyWebRecruit.DataBase;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
-        public MyWebRecruitDataBaseContext()
+        public MyWebRecruitDataBaseContext(string connectionSring)
+        {            
+        }
+
+        public static string GetConnectionString()
         {
+            return Startup.ConnectionString;
         }
 
         public MyWebRecruitDataBaseContext(DbContextOptions<MyWebRecruitDataBaseContext> options)
@@ -42,8 +45,9 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
             
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(connectionString);
+                //optionsBuilder.UseSqlServer(connectionString);
+                GetConnectionString();
+                
             }
         }
 
