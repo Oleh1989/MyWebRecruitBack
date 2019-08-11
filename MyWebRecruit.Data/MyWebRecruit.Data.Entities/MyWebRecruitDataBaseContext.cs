@@ -7,11 +7,9 @@ using MyWebRecruit;
 namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 {
     public partial class MyWebRecruitDataBaseContext : DbContext
-    {        
-        private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyWebRecruit.DataBase;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
-
-        public MyWebRecruitDataBaseContext(string connectionSring)
-        {            
+    {
+        public MyWebRecruitDataBaseContext()
+        {
         }
 
         public static string GetConnectionString()
@@ -42,12 +40,12 @@ namespace MyWebRecruit.Data.MyWebRecruit.Data.Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+
             if (!optionsBuilder.IsConfigured)
             {
                 //optionsBuilder.UseSqlServer(connectionString);
                 GetConnectionString();
-                
+
             }
         }
 
