@@ -31,10 +31,12 @@ namespace MyWebRecruit.Services
             string userNameDummy = string.Empty, userEmailDummy = string.Empty, userPaswordDummy = string.Empty;
             byte isAdminDummy = 0;
             string exceptionMessage = null;
+            bool isEmailValid = false;
             using (var context = new MyWebRecruitDataBaseContext())
             {
                 exceptionMessage = Logic.NullOrEmptyField(userNameDummy, userEmailDummy, userPaswordDummy);
-                if (exceptionMessage == null)
+                isEmailValid = Logic.EmailValidation(userEmailDummy);
+                if (exceptionMessage == null && isEmailValid)
                 {
                     var newUser = new User
                     {
@@ -47,8 +49,7 @@ namespace MyWebRecruit.Services
                     };
 
                     context.User.Add(newUser);
-                    context.SaveChanges();
-                   
+                    context.SaveChanges();                   
                 }
             }
         }        

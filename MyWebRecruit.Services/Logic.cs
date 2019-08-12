@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Net.Mail;
 
 namespace MyWebRecruit.Services
 {
@@ -16,6 +17,19 @@ namespace MyWebRecruit.Services
                 }                
             }
             return null;
+        }
+
+        public static bool EmailValidation(string input)
+        {
+            try
+            {
+                MailAddress mailAddress = new MailAddress(input);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
     }
 }
