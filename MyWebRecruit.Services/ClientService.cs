@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using MyWebRecruit.Domain.Services;
+using MyWebRecruit.Domain.Entities;
 using MyWebRecruit.Data.MyWebRecruit.Data.Entities;
 
 namespace MyWebRecruit.Services
@@ -16,14 +17,18 @@ namespace MyWebRecruit.Services
 
         }
 
-        public void GetClientList()
+        public IQueryable<Domain.Entities.Client> GetClientList(Domain.Entities.User user)
         {
+            IQueryable<Domain.Entities.Client> clients;
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                IQueryable<Client> clients = context.Client
-                    .Where(x => x.IsDeleted == false)
+                clients = context.Client
+                    .Cast<Domain.Entities.Client>()
+                    .Where(x => x.IsDeleted == false && x.CreatedBy == user.Id)
                     .OrderBy(x => x.Name);
-            }           
+            }
+
+            return clients;
         }
 
         public void CreateClient(int userId)
@@ -33,27 +38,22 @@ namespace MyWebRecruit.Services
             int countryDummy = 0;
             string phoneDummy = string.Empty;
 
-            string exceptionMessage = null;
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                exceptionMessage = Logic.NullOrEmptyField(clientNameDummy, addressLineDummy, 
-                    addressCityDummy, phoneDummy);
-                if (exceptionMessage == null)
+                var newClient = new Client
                 {
-                    var newClient = new Client
-                    {
-                        Name = clientNameDummy,
-                        WebSite = clientWebSite,
-                        AddressLine = addressLineDummy,
-                        AddressCity = addressCityDummy,
-                        AddressIndex = addressIndexDummy,
-                        CountryId = countryDummy,
-                        TelNo = phoneDummy,
-                        CreatedBy = userId                        
-                    };
-                    context.Client.Add(newClient);
-                    context.SaveChanges();
-                }
+                    Name = clientNameDummy,
+                    WebSite = clientWebSite,
+                    AddressLine = addressLineDummy,
+                    AddressCity = addressCityDummy,
+                    AddressIndex = addressIndexDummy,
+                    CountryId = countryDummy,
+                    TelNo = phoneDummy,
+                    CreatedBy = userId
+                };
+                context.Client.Add(newClient);
+                context.SaveChanges();
+
             }
         }
 
@@ -64,28 +64,23 @@ namespace MyWebRecruit.Services
             int countryDummy = 0;
             string phoneDummy = string.Empty;
 
-            string exceptionMessage = null;
             using (var context = new MyWebRecruitDataBaseContext())
             {
                 var clientToUpdate = context.Client.FirstOrDefault(c => c.Id == client.Id);
                 if (clientToUpdate != null)
                 {
-                    exceptionMessage = Logic.NullOrEmptyField(clientNameDummy, addressLineDummy,
-                    addressCityDummy, phoneDummy);
-                    if (exceptionMessage == null)
-                    {
-                        clientToUpdate.Name = clientNameDummy;
-                        clientToUpdate.WebSite = clientWebSite;
-                        clientToUpdate.AddressLine = addressLineDummy;
-                        clientToUpdate.AddressCity = addressCityDummy;
-                        clientToUpdate.AddressIndex = addressIndexDummy;
-                        clientToUpdate.CountryId = countryDummy;
-                        clientToUpdate.TelNo = phoneDummy;
-                        clientToUpdate.CreatedBy = userId;
 
-                        context.Client.Update(clientToUpdate);
-                        context.SaveChanges();
-                    }
+                    clientToUpdate.Name = clientNameDummy;
+                    clientToUpdate.WebSite = clientWebSite;
+                    clientToUpdate.AddressLine = addressLineDummy;
+                    clientToUpdate.AddressCity = addressCityDummy;
+                    clientToUpdate.AddressIndex = addressIndexDummy;
+                    clientToUpdate.CountryId = countryDummy;
+                    clientToUpdate.TelNo = phoneDummy;
+                    clientToUpdate.CreatedBy = userId;
+
+                    context.Client.Update(clientToUpdate);
+                    context.SaveChanges();
                 }
             }
         }

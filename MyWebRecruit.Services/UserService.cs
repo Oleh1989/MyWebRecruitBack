@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using MyWebRecruit.Domain.Services;
+using MyWebRecruit.Domain.Entities;
 using MyWebRecruit.Data.MyWebRecruit.Data.Entities;
 
 namespace MyWebRecruit.Services
@@ -16,14 +17,17 @@ namespace MyWebRecruit.Services
 
         }
 
-        public void GetUserList()
+        public IQueryable<Domain.Entities.User> GetUserList()
         {
+            IQueryable<Domain.Entities.User> users;
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                IQueryable<User> users = context.User
+                users = context.User
+                    .Cast<Domain.Entities.User>()
                     .Where(x => x.IsDeleted == false)
                     .OrderBy(x => x.UserName);
             }
+            return users;
         }
 
         public void CreateUser()
@@ -34,31 +38,26 @@ namespace MyWebRecruit.Services
             bool isEmailValid = false;
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                exceptionMessage = Logic.NullOrEmptyField(userNameDummy, userEmailDummy, userPaswordDummy);
-                isEmailValid = Logic.EmailValidation(userEmailDummy);
-                if (exceptionMessage == null && isEmailValid)
+                var newUser = new User
                 {
-                    var newUser = new User
-                    {
-                        UserName = userNameDummy,
-                        UserEmail = userEmailDummy,
-                        Password = userPaswordDummy,
-                        AdminYn = isAdminDummy,
-                        IsDeleted = false,
-                        CreateTime = DateTime.Now
-                    };
+                    UserName = userNameDummy,
+                    UserEmail = userEmailDummy,
+                    Password = userPaswordDummy,
+                    AdminYn = isAdminDummy,
+                    IsDeleted = false,
+                    CreateTime = DateTime.Now
+                };
 
-                    context.User.Add(newUser);
-                    context.SaveChanges();                   
-                }
+                context.User.Add(newUser);
+                context.SaveChanges();
+
             }
-        }        
+        }
 
         public void UpdateUser(Domain.Entities.User user)
         {
             string userNameDummy = string.Empty, userEmailDummy = string.Empty, userPasswordDummy = string.Empty;
             byte isAdminDummy = 0;
-            string exceptionMessage = null;
             using (var context = new MyWebRecruitDataBaseContext())
             {
                 // Get entity by id
@@ -66,21 +65,18 @@ namespace MyWebRecruit.Services
 
                 if (userToUpdate != null)
                 {
-                    exceptionMessage = Logic.NullOrEmptyField(userNameDummy, userEmailDummy, userPasswordDummy);
-                    if (exceptionMessage == null)
-                    {
-                        userToUpdate.UserName = userNameDummy;
-                        userToUpdate.UserEmail = userEmailDummy;
-                        userToUpdate.Password = userPasswordDummy;
-                        userToUpdate.CreateTime = DateTime.Now;
-                        userToUpdate.AdminYn = isAdminDummy;
+                    userToUpdate.UserName = userNameDummy;
+                    userToUpdate.UserEmail = userEmailDummy;
+                    userToUpdate.Password = userPasswordDummy;
+                    userToUpdate.CreateTime = DateTime.Now;
+                    userToUpdate.AdminYn = isAdminDummy;
 
-                        // Update entity in DbSet
-                        context.User.Update(userToUpdate);
+                    // Update entity in DbSet
+                    context.User.Update(userToUpdate);
 
-                        // Save changes in DbSet;
-                        context.SaveChanges();
-                    }                   
+                    // Save changes in DbSet;
+                    context.SaveChanges();
+
                 }
             }
         }

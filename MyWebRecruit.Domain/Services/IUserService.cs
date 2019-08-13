@@ -9,7 +9,7 @@ namespace MyWebRecruit.Domain.Services
 {
     public interface IUserService
     {
-        void GetUserList();
+        IQueryable<User> GetUserList();
         void CreateUser();
         void UpdateUser(User user);
         void DeleteUser(User user);

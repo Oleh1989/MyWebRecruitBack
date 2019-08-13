@@ -8,7 +8,7 @@ namespace MyWebRecruit.Domain.Services
 {
     public interface IClientService
     {
-        void GetClientList();
+        IQueryable<Client> GetClientList(User user);
         void CreateClient(int userId);
         void UpdateClient(Client client, int userId);
         void DeleteClient(Client client);
