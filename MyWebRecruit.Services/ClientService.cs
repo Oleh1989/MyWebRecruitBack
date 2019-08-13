@@ -21,7 +21,7 @@ namespace MyWebRecruit.Services
             using (var context = new MyWebRecruitDataBaseContext())
             {
                 IQueryable<Client> clients = context.Client
-                    .Where(x => x.IsDeleted != false)
+                    .Where(x => x.IsDeleted == false)
                     .OrderBy(x => x.Name);
             }           
         }
@@ -32,7 +32,6 @@ namespace MyWebRecruit.Services
             string addressLineDummy = string.Empty, addressCityDummy = string.Empty, addressIndexDummy = string.Empty;
             int countryDummy = 0;
             string phoneDummy = string.Empty;
-            int thisUser = userId;
 
             string exceptionMessage = null;
             using (var context = new MyWebRecruitDataBaseContext())

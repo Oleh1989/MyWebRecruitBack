@@ -13,8 +13,8 @@ namespace MyWebRecruit.Services
             {
                 if (string.IsNullOrEmpty(field))
                 {
-                    return "Several fields can not be empty";                    
-                }                
+                    return "Several fields can not be empty";
+                }
             }
             return null;
         }
@@ -31,5 +31,6 @@ namespace MyWebRecruit.Services
                 return false;
             }
         }
+
     }
 }

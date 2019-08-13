@@ -21,7 +21,7 @@ namespace MyWebRecruit.Services
             using (var context = new MyWebRecruitDataBaseContext())
             {
                 IQueryable<User> users = context.User
-                    .Where(x => x.IsDeleted != false)
+                    .Where(x => x.IsDeleted == false)
                     .OrderBy(x => x.UserName);
             }
         }
