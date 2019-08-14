@@ -49,7 +49,6 @@ namespace MyWebRecruit.Services
 
                 context.User.Add(newUser);
                 context.SaveChanges();
-
             }
         }
 

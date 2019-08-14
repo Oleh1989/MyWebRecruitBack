@@ -6,7 +6,7 @@ namespace MyWebRecruit.Services.Entities
 {
     public class CandidateDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -22,11 +22,10 @@ namespace MyWebRecruit.Services.Entities
         public int? Age { get; set; }
         public int CreatedBy { get; set; }
 
-        public bool IsDeleted { get; set; }
-
         public string AddressLine { get; set; }
         public string AddressCity { get; set; }
         public string AddressIndex { get; set; }
         public int? CountryId { get; set; }
+        public string Country { get; set; }
     }
 }

@@ -17,7 +17,6 @@ namespace MyWebRecruit.Services.Entities
         public int CandId { get; set; }
         public int JobId { get; set; }
 
-        // IDeletable interface
-        public bool IsDeleted { get; set; }
+
     }
 }

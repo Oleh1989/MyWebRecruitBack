@@ -17,7 +17,5 @@ namespace MyWebRecruit.Services.Entities
         public string JobTitle { get; set; }
 
         public int ClientId { get; set; }
-
-        public bool IsDeleted { get; set; }
     }
 }

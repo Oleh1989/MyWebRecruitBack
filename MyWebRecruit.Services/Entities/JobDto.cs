@@ -13,8 +13,7 @@ namespace MyWebRecruit.Services.Entities
         public string AddressCity { get; set; }
         public string AddressIndex { get; set; }
         public int? CountryId { get; set; }
-
-        public bool IsDeleted { get; set; }
+        public string Country { get; set; }
 
         public string JobCurrency { get; set; }
         public string JobStatus { get; set; }

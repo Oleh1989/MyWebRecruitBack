@@ -9,6 +9,9 @@ namespace MyWebRecruit.Services.Interfaces
 {
     public interface IAssignmentService
     {
-        IQueryable<AssignmentDto> GetAssignmentList(JobDto job, CandidateDto candidate);
+        IQueryable<AssignmentDto> GetAssignmentList();
+        void CreateAssignment(int assignmentId, CandidateDto candidate, JobDto job);
+        void UpdateAssignment(AssignmentDto assignment);
+        void DeleteAssignment(AssignmentDto assignment);
     }
 }
