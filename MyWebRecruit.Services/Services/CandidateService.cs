@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MyWebRecruit.Data.Entities;
 using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Interfaces;
-
+using MyWebRecruit.Services.Extensions;
 
 namespace MyWebRecruit.Services.Services
 {
@@ -24,47 +24,18 @@ namespace MyWebRecruit.Services.Services
             using (var context = new MyWebRecruitDataBaseContext())
             {
                 candidates = context.Candidate.Cast<CandidateDto>()
-                    .Where(x => x.IsDeleted == false && x.CreatedBy == user.Id)
+                    .Where(x => !x.IsDeleted && x.CreatedBy == user.Id)
                     .OrderBy(x => x.LastName);
             }
 
             return candidates;
         }
 
-        public void CreateCandidate(int userId)
+        public void CreateCandidate(CandidateDto candidateDto)
         {
-            string firstNameDummy = string.Empty, lastNameDummy = string.Empty, middleNameDummy = string.Empty;
-            string emailDummy = string.Empty;
-            string telephoneDummy = string.Empty, alterTelephoneDummy = string.Empty;
-            byte disturbYN = 0;
-            string facebookDummy = string.Empty, linkedinDummy = string.Empty, skypeDummy = string.Empty;
-            DateTime dobDummy = DateTime.Now;
-            int ageDummy = DateTime.Now.Year - dobDummy.Year;
-
-            string AddressLineDummy = string.Empty, addressCityDummy = string.Empty, addressIndex = string.Empty;
-
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                var newCandidate = new Candidate
-                {                    
-                    FirstName = firstNameDummy,
-                    LastName = lastNameDummy,
-                    MiddleName = middleNameDummy,
-                    Email = emailDummy,
-                    TelNo = telephoneDummy,
-                    AlterTelNo = alterTelephoneDummy,
-                    DisturbYn = disturbYN,
-                    Facebook = facebookDummy,
-                    Linkedin = linkedinDummy,
-                    Skype = skypeDummy,
-                    Dob = dobDummy,
-                    Age = ageDummy,
-                    CreatedBy = userId,
-                    AddressLine = AddressLineDummy,
-                    AddressCity = addressCityDummy,
-                    AddressIndex = addressIndex
-                };
-                context.Candidate.Add(newCandidate);
+                context.Candidate.Add(candidateDto.ToData());
                 context.SaveChanges();
             }
         }
@@ -101,8 +72,8 @@ namespace MyWebRecruit.Services.Services
                     candidateToUpdate.AddressLine = AddressLineDummy;
                     candidateToUpdate.AddressCity = addressCityDummy;
                     candidateToUpdate.AddressIndex = addressIndex;
-                                        
-                    context.Candidate.Update(candidateToUpdate);                    
+
+                    context.Candidate.Update(candidateToUpdate);
                     context.SaveChanges();
 
                 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MyWebRecruit.Data.Entities;
 using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Interfaces;
+using MyWebRecruit.Services.Extensions;
 
 namespace MyWebRecruit.Services.Services
 {
@@ -25,21 +26,20 @@ namespace MyWebRecruit.Services.Services
             using (var context = new MyWebRecruitDataBaseContext())
             {
                 contacts = context.Contact.Cast<ContactDto>()                    
-                    .Where(x => x.IsDeleted == false && x.ClientId == client.CountryId)
+                    .Where(x => !x.IsDeleted && x.ClientId == client.CountryId)
                     .OrderBy(x => x.LastName)
                     .AsQueryable();
             }
             return contacts;
         }
 
-        public void CreateContact(int clientId)
+        public void ContactCreate(ContactDto contactDto)
         {
-           
-        }
-
-        public void ContactCreate(int clientId)
-        {
-           
+            using (var context = new MyWebRecruitDataBaseContext())
+            {
+                context.Contact.Add(contactDto.ToData());
+                context.SaveChanges();
+            }  
         }
 
         public void UpdateContact(ContactDto contact)

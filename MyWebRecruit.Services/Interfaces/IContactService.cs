@@ -10,7 +10,7 @@ namespace MyWebRecruit.Services.Interfaces
     public interface IContactService
     {
         IQueryable<ContactDto> GetContactList(ClientDto client);
-        void ContactCreate(int clientId);
+        void ContactCreate(ContactDto contactDto);
         void UpdateContact(ContactDto contact);
         void DeleteContact(ContactDto contact);
     }

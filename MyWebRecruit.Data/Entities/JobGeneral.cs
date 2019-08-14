@@ -21,6 +21,7 @@ namespace MyWebRecruit.Data.Entities
         public string AddressCity { get; set; }
         public string AddressIndex { get; set; }
         public int? CountryId { get; set; }
+        public string Country { get; set; }
 
         // IDeletable interface
         public bool IsDeleted { get; set; }

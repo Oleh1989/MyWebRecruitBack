@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MyWebRecruit.Data.Entities;
 using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Interfaces;
+using MyWebRecruit.Services.Extensions;
 
 namespace MyWebRecruit.Services.Services
 {
@@ -24,36 +25,18 @@ namespace MyWebRecruit.Services.Services
             {
                 assignments = context.Assignment
                     .Cast<AssignmentDto>()
-                    .Where(x => x.IsDeleted == false)
+                    .Where(x => !x.IsDeleted)
                     .OrderBy(x => x.JobName);
             }
 
             return assignments;
         }
 
-        public void CreateAssignment(int assignmentId, CandidateDto candidate, JobDto job)
-        {
-            DateTime satrtDtDummy = DateTime.Now, endDtDummy = DateTime.Now;
-            decimal salaryDummy = 0;
-            int assigTypeDummy = 0;
-            string jobNameDummy = string.Empty;
-            string reasonLeaveDummy = string.Empty;
-
+        public void CreateAssignment(AssignmentDto assignmentDto)
+        {            
             using (var context = new MyWebRecruitDataBaseContext())
-            {
-                var newAssignment = new Assignment
-                {
-                    StartDt = satrtDtDummy,
-                    EndDt = endDtDummy,
-                    Salary = salaryDummy,
-                    AssigType = assigTypeDummy,
-                    JobName = jobNameDummy,
-                    ReasonLeave = reasonLeaveDummy,
-                    CandId = candidate.Id,
-                    JobId = job.Id
-                };
-
-                context.Assignment.Add(newAssignment);
+            {                
+                context.Assignment.Add(assignmentDto.ToData());
                 context.SaveChanges();
             }
         }

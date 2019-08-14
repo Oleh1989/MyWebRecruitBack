@@ -10,7 +10,7 @@ namespace MyWebRecruit.Services.Interfaces
     public interface IClientService
     {
         IQueryable<ClientDto> GetClientList(UserDto user);
-        void CreateClient(int userId);
+        void CreateClient(ClientDto clientDto);
         void UpdateClient(ClientDto client, int userId);
         void DeleteClient(ClientDto client);
     }

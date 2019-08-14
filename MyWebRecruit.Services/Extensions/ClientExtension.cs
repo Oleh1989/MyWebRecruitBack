@@ -35,7 +35,20 @@ namespace MyWebRecruit.Services.Extensions
             if (clientDto == null)
                 return null;
 
+            var client = new Client
+            {
+                Id = clientDto.Id.Value,
+                Name = clientDto.Name,
+                AddressCity = clientDto.AddressCity,
+                AddressIndex = clientDto.AddressIndex,
+                AddressLine = clientDto.AddressLine,
+                CountryId = clientDto.CountryId.Value,
+                CreatedBy = clientDto.CreatedBy,
+                TelNo = clientDto.TelNo,
+                WebSite = clientDto.WebSite
+            };
 
+            return client;
         }
     }
 }

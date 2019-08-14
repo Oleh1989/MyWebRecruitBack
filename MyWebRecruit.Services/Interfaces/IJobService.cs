@@ -10,7 +10,7 @@ namespace MyWebRecruit.Services.Interfaces
     public interface IJobService
     {
         IQueryable<JobDto> GetJobList(ContactDto contact);
-        void CreateJob(int contactId);
+        void CreateJob(JobDto jobDto);
         void UpdateJob(JobDto job);
         void DeleteJob(JobDto job);
     }

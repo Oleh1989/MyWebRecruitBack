@@ -19,7 +19,6 @@ namespace MyWebRecruit.Services.Entities
         public string Linkedin { get; set; }
         public string Skype { get; set; }
         public DateTime? Dob { get; set; }
-        public int? Age { get; set; }
         public int CreatedBy { get; set; }
 
         public string AddressLine { get; set; }

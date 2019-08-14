@@ -8,6 +8,7 @@ using MyWebRecruit.Data.Entities;
 using MyWebRecruit.Services.Services;
 using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Interfaces;
+using MyWebRecruit.Services.Extensions;
 
 namespace MyWebRecruit.Services
 {
@@ -25,29 +26,17 @@ namespace MyWebRecruit.Services
             {
                 users = context.User
                     .Cast<UserDto>()
-                    .Where(x => x.IsDeleted == false)
+                    .Where(x => !x.IsDeleted)
                     .OrderBy(x => x.UserName);
             }
             return users;
         }
 
-        public void CreateUser()
-        {
-            string userNameDummy = string.Empty, userEmailDummy = string.Empty, userPaswordDummy = string.Empty;
-            byte isAdminDummy = 0;
+        public void CreateUser(UserDto userDto)
+        {            
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                var newUser = new User
-                {
-                    UserName = userNameDummy,
-                    UserEmail = userEmailDummy,
-                    Password = userPaswordDummy,
-                    AdminYn = isAdminDummy,
-                    IsDeleted = false,
-                    CreateTime = DateTime.Now
-                };
-
-                context.User.Add(newUser);
+                context.User.Add(userDto.ToData());
                 context.SaveChanges();
             }
         }

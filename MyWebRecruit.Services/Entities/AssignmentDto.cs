@@ -6,7 +6,7 @@ namespace MyWebRecruit.Services.Entities
 {
     public class AssignmentDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public DateTime StartDt { get; set; }
         public DateTime? EndDt { get; set; }
@@ -16,7 +16,5 @@ namespace MyWebRecruit.Services.Entities
         public string ReasonLeave { get; set; }
         public int CandId { get; set; }
         public int JobId { get; set; }
-
-
     }
 }

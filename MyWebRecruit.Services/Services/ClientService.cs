@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MyWebRecruit.Data.Entities;
 using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Interfaces;
+using MyWebRecruit.Services.Extensions;
 
 namespace MyWebRecruit.Services.Services
 {
@@ -24,36 +25,19 @@ namespace MyWebRecruit.Services.Services
             {
                 clients = context.Client
                     .Cast<ClientDto>()
-                    .Where(x => x.IsDeleted == false && x.CreatedBy == user.Id)
+                    .Where(x => !x.IsDeleted && x.CreatedBy == user.Id)
                     .OrderBy(x => x.Name);
             }
 
             return clients;
         }
 
-        public void CreateClient(int userId)
-        {
-            string clientNameDummy = string.Empty, clientWebSite = string.Empty;
-            string addressLineDummy = string.Empty, addressCityDummy = string.Empty, addressIndexDummy = string.Empty;
-            int countryDummy = 0;
-            string phoneDummy = string.Empty;
-
+        public void CreateClient(ClientDto clientDto)
+        {            
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                var newClient = new Client
-                {
-                    Name = clientNameDummy,
-                    WebSite = clientWebSite,
-                    AddressLine = addressLineDummy,
-                    AddressCity = addressCityDummy,
-                    AddressIndex = addressIndexDummy,
-                    CountryId = countryDummy,
-                    TelNo = phoneDummy,
-                    CreatedBy = userId
-                };
-                context.Client.Add(newClient);
+                context.Client.Add(clientDto.ToData());
                 context.SaveChanges();
-
             }
         }
 

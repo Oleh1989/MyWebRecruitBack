@@ -11,7 +11,6 @@
     [LINKEDIN]     NVARCHAR (100) NULL,
     [SKYPE]        NVARCHAR (100) NULL,
     [DOB]          DATE           NULL,
-    [AGE]          INT            NULL,
     [CREATED_BY]   INT            NOT NULL,
     [ADDRESS_LINE] NCHAR(100) NULL, 
     [ADDRESS_CITY] NCHAR(20) NULL, 

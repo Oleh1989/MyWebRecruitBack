@@ -10,7 +10,7 @@ namespace MyWebRecruit.Services.Interfaces
     public interface IUserService
     {
         IQueryable<UserDto> GetUserList();
-        void CreateUser();
+        void CreateUser(UserDto userDto);
         void UpdateUser(UserDto user);
         void DeleteUser(UserDto user);
     }

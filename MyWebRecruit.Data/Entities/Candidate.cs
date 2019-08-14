@@ -25,7 +25,6 @@ namespace MyWebRecruit.Data.Entities
         public string Linkedin { get; set; }
         public string Skype { get; set; }
         public DateTime? Dob { get; set; }
-        public int? Age { get; set; }
         public int CreatedBy { get; set; }
 
         // IDeletable interface

@@ -125,8 +125,6 @@ namespace MyWebRecruit.Data.Entities
                     .HasColumnName("CANDIDATE_ID")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Age).HasColumnName("AGE");
-
                 entity.Property(e => e.AlterTelNo)
                     .HasColumnName("ALTER_TEL_NO")
                     .HasMaxLength(20);
