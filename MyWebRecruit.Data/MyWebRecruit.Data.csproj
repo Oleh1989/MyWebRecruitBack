@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MyWebRecruit.Api\MyWebRecruit.Api.csproj" />
     <ProjectReference Include="..\MyWebRecruit.DataBase\MyWebRecruit.DataBase.sqlproj" />
-    <ProjectReference Include="..\MyWebRecruit\MyWebRecruit.Api.csproj" />
   </ItemGroup>
 
 </Project>

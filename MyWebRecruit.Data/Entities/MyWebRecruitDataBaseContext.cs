@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Configuration;
-using MyWebRecruit;
+using MyWebRecruit.Api;
 
 namespace MyWebRecruit.Data.Entities
 {
@@ -24,13 +24,11 @@ namespace MyWebRecruit.Data.Entities
 
         public virtual DbSet<AssigType> AssigType { get; set; }
         public virtual DbSet<Assignment> Assignment { get; set; }
-        public virtual DbSet<Candidate> Candidate { get; set; }
-        public virtual DbSet<CandidateAddress> CandidateAddress { get; set; }
+        public virtual DbSet<Candidate> Candidate { get; set; }        
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Contact> Contact { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Cv> Cv { get; set; }
-        public virtual DbSet<JobFinancial> JobFinancial { get; set; }
         public virtual DbSet<JobGeneral> JobGeneral { get; set; }
         public virtual DbSet<Journal> Journal { get; set; }
         public virtual DbSet<PayMethod> PayMethod { get; set; }
@@ -177,41 +175,31 @@ namespace MyWebRecruit.Data.Entities
                     .HasColumnName("TEL_NO")
                     .HasMaxLength(20);
 
+                entity.Property(e => e.AddressLine)
+                .HasColumnName("ADDRESS_LINE")
+                .HasMaxLength(100);
+
+                entity.Property(e => e.AddressCity)
+                .HasColumnName("ADDRESS_CITY")
+                .HasMaxLength(20);
+
+                entity.Property(e => e.AddressIndex)
+                .HasColumnName("ADDRESS_INDEX")
+                .HasMaxLength(10);
+
+                entity.Property(e => e.Country)
+                .HasColumnName("COUNTRY_ID");
+
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.Candidate)
                     .HasForeignKey(d => d.CreatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Candidate_User");
-            });
-
-            modelBuilder.Entity<CandidateAddress>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-
-                entity.ToTable("Candidate_Address");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("CANDIDATE_ID")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.AddressCity)
-                    .HasColumnName("ADDRESS_CITY")
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.AddressIndex)
-                    .HasColumnName("ADDRESS_INDEX")
-                    .HasMaxLength(10);
-
-                entity.Property(e => e.AddressLine)
-                    .HasColumnName("ADDRESS_LINE")
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.CountryId).HasColumnName("COUNTRY_ID");
 
                 entity.HasOne(d => d.Country)
-                    .WithMany(p => p.CandidateAddress)
-                    .HasForeignKey(d => d.CountryId)
-                    .HasConstraintName("FK_Candidate_Address_Country");
+                .WithMany(p => p.Candidate)
+                .HasForeignKey(d => d.CountryId)
+                .HasConstraintName("FK_Candidate_Country");
             });
 
             modelBuilder.Entity<Client>(entity =>
@@ -331,17 +319,36 @@ namespace MyWebRecruit.Data.Entities
                     .HasForeignKey(d => d.CandId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CV_Candidate");
-            });
+            });            
 
-            modelBuilder.Entity<JobFinancial>(entity =>
+            modelBuilder.Entity<JobGeneral>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
-                entity.ToTable("Job_Financial");
+                entity.ToTable("Job_General");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("JOB_ID")
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.AddressCity)
+                    .HasColumnName("ADDRESS_CITY")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.AddressIndex)
+                    .HasColumnName("ADDRESS_INDEX")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.AddressLine)
+                    .HasColumnName("ADDRESS_LINE")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.CountryId).HasColumnName("COUNTRY");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("NAME")
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.Category)
                     .IsRequired()
@@ -374,46 +381,10 @@ namespace MyWebRecruit.Data.Entities
                     .HasColumnName("START_DT")
                     .HasColumnType("date");
 
-                entity.HasOne(d => d.Job)
-                    .WithOne(p => p.JobFinancial)
-                    .HasForeignKey<JobFinancial>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Job_Financial_Job_General");
-
                 entity.HasOne(d => d.PayMethodNavigation)
-                    .WithMany(p => p.JobFinancial)
+                    .WithMany(p => p.JobGeneral)
                     .HasForeignKey(d => d.PayMethod)
-                    .HasConstraintName("FK_Job_Financial_Pay_Method");
-            });
-
-            modelBuilder.Entity<JobGeneral>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-
-                entity.ToTable("Job_General");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("JOB_ID")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.AddressCity)
-                    .HasColumnName("ADDRESS_CITY")
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.AddressIndex)
-                    .HasColumnName("ADDRESS_INDEX")
-                    .HasMaxLength(10);
-
-                entity.Property(e => e.AddressLine)
-                    .HasColumnName("ADDRESS_LINE")
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.CountryId).HasColumnName("COUNTRY");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("NAME")
-                    .HasMaxLength(100);
+                    .HasConstraintName("FK_Job_General_Pay_Method");
 
                 entity.HasOne(d => d.CountryNavigation)
                     .WithMany(p => p.JobGeneral)

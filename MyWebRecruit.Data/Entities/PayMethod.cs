@@ -7,7 +7,7 @@ namespace MyWebRecruit.Data.Entities
     {
         public PayMethod()
         {
-            JobFinancial = new HashSet<JobFinancial>();
+            JobGeneral = new HashSet<JobGeneral>();
         }
 
         // IIdentified interface
@@ -18,6 +18,6 @@ namespace MyWebRecruit.Data.Entities
         // IDeletable interface
         public bool IsDeleted { get; set; }
 
-        public virtual ICollection<JobFinancial> JobFinancial { get; set; }
+        public virtual ICollection<JobGeneral> JobGeneral { get; set; }
     }
 }

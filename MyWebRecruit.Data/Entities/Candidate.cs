@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MyWebRecruit.Data.Entities
 {
-    public partial class Candidate : IIdentified, IDeletable
+    public partial class Candidate : IIdentified, IDeletable, IAddress
     {
         public Candidate()
         {
@@ -30,6 +30,12 @@ namespace MyWebRecruit.Data.Entities
 
         // IDeletable interface
         public bool IsDeleted { get; set; }
+
+        public string AddressLine { get; set; }
+        public string AddressCity { get; set; }
+        public string AddressIndex { get; set; }
+        public int? CountryId { get; set; }
+        public virtual Country Country { get; set; }
 
         public virtual User CreatedByNavigation { get; set; }
         public virtual ICollection<Assignment> Assignment { get; set; }

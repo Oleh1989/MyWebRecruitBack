@@ -7,7 +7,7 @@ namespace MyWebRecruit.Data.Entities
     {
         public Country()
         {
-            CandidateAddress = new HashSet<CandidateAddress>();
+            Candidate = new HashSet<Candidate>();
             Client = new HashSet<Client>();
             JobGeneral = new HashSet<JobGeneral>();
         }
@@ -20,7 +20,7 @@ namespace MyWebRecruit.Data.Entities
         // IDeletable interface
         public bool IsDeleted { get; set; }
 
-        public virtual ICollection<CandidateAddress> CandidateAddress { get; set; }
+        public virtual ICollection<Candidate> Candidate{ get; set; }
         public virtual ICollection<Client> Client { get; set; }
         public virtual ICollection<JobGeneral> JobGeneral { get; set; }
     }

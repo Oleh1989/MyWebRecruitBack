@@ -7,7 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using MyWebRecruit.Controllers;
+using MyWebRecruit.Api.Controllers;
 
 namespace MyWebRecruit.Api
 {

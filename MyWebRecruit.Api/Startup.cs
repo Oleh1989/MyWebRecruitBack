@@ -19,14 +19,6 @@ namespace MyWebRecruit.Api
         public IConfigurationRoot Configuration { get; set; }
         public static string ConnectionString { get; private set; }
 
-        /*
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-        */
-        //public IConfiguration Configuration { get; }
-
         public Startup(IHostingEnvironment environment)
         {
             Configuration = new ConfigurationBuilder().SetBasePath(environment.ContentRootPath).AddJsonFile("appSettings.json").Build();
@@ -36,8 +28,6 @@ namespace MyWebRecruit.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //string connection = Configuration.GetConnectionString("DefaultConnection");
-            //services.AddDbContext<MyWebRecruitDataBaseContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
         }
 

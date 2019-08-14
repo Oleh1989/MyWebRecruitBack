@@ -66,12 +66,10 @@
     <Build Include="dbo\Tables\Pay_Method.sql" />
     <Build Include="dbo\Tables\Journal.sql" />
     <Build Include="dbo\Tables\Job_General.sql" />
-    <Build Include="dbo\Tables\Job_Financial.sql" />
     <Build Include="dbo\Tables\CV.sql" />
     <Build Include="dbo\Tables\Country.sql" />
     <Build Include="dbo\Tables\Contact.sql" />
     <Build Include="dbo\Tables\Client.sql" />
-    <Build Include="dbo\Tables\Candidate_Address.sql" />
     <Build Include="dbo\Tables\Candidate.sql" />
     <Build Include="dbo\Tables\Assignment.sql" />
     <Build Include="dbo\Tables\Assig_Type.sql" />

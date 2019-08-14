@@ -46,7 +46,7 @@ namespace MyWebRecruit.Services.Services
             using (var context = new MyWebRecruitDataBaseContext())
             {
                 var newCandidate = new Candidate
-                {
+                {                    
                     FirstName = firstNameDummy,
                     LastName = lastNameDummy,
                     MiddleName = middleNameDummy,
@@ -59,19 +59,13 @@ namespace MyWebRecruit.Services.Services
                     Skype = skypeDummy,
                     Dob = dobDummy,
                     Age = ageDummy,
-                    CreatedBy = userId
-                };
-                var newCandAddress = new CandidateAddress
-                {
-                    Id = newCandidate.Id,
+                    CreatedBy = userId,
                     AddressLine = AddressLineDummy,
                     AddressCity = addressCityDummy,
                     AddressIndex = addressIndex
                 };
                 context.Candidate.Add(newCandidate);
-                context.CandidateAddress.Add(newCandAddress);
                 context.SaveChanges();
-
             }
         }
 
@@ -90,33 +84,25 @@ namespace MyWebRecruit.Services.Services
             using (var context = new MyWebRecruitDataBaseContext())
             {
                 var candidateToUpdate = context.Candidate.FirstOrDefault(c => c.Id == candidate.Id);
-                if (candidate != null)
+                if (candidateToUpdate != null)
                 {
-                    var newCandidate = new Candidate
-                    {
-                        FirstName = firstNameDummy,
-                        LastName = lastNameDummy,
-                        MiddleName = middleNameDummy,
-                        Email = emailDummy,
-                        TelNo = telephoneDummy,
-                        AlterTelNo = alterTelephoneDummy,
-                        DisturbYn = disturbYN,
-                        Facebook = facebookDummy,
-                        Linkedin = linkedinDummy,
-                        Skype = skypeDummy,
-                        Dob = dobDummy,
-                        Age = ageDummy,
-                        CreatedBy = userId
-                    };
-                    var newCandAddress = new CandidateAddress
-                    {
-                        Id = newCandidate.Id,
-                        AddressLine = AddressLineDummy,
-                        AddressCity = addressCityDummy,
-                        AddressIndex = addressIndex
-                    };
-                    context.Candidate.Update(newCandidate);
-                    context.CandidateAddress.Update(newCandAddress);
+                    candidateToUpdate.FirstName = firstNameDummy;
+                    candidateToUpdate.LastName = lastNameDummy;
+                    candidateToUpdate.MiddleName = middleNameDummy;
+                    candidateToUpdate.Email = emailDummy;
+                    candidateToUpdate.TelNo = telephoneDummy;
+                    candidateToUpdate.AlterTelNo = alterTelephoneDummy;
+                    candidateToUpdate.DisturbYn = disturbYN;
+                    candidateToUpdate.Facebook = facebookDummy;
+                    candidateToUpdate.Linkedin = linkedinDummy;
+                    candidateToUpdate.Skype = skypeDummy;
+                    candidateToUpdate.Dob = dobDummy;
+                    candidateToUpdate.Age = ageDummy;
+                    candidateToUpdate.AddressLine = AddressLineDummy;
+                    candidateToUpdate.AddressCity = addressCityDummy;
+                    candidateToUpdate.AddressIndex = addressIndex;
+                                        
+                    context.Candidate.Update(candidateToUpdate);                    
                     context.SaveChanges();
 
                 }

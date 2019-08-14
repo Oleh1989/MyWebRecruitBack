@@ -75,7 +75,6 @@ namespace MyWebRecruit.Services
 
                     // Save changes in DbSet;
                     context.SaveChanges();
-
                 }
             }
         }
