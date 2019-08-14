@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MyWebRecruit.Api\MyWebRecruit.Api.csproj" />
     <ProjectReference Include="..\MyWebRecruit.Data\MyWebRecruit.Data.csproj" />
   </ItemGroup>
 
