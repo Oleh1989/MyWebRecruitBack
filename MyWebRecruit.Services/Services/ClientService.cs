@@ -41,29 +41,14 @@ namespace MyWebRecruit.Services.Services
             }
         }
 
-        public void UpdateClient(ClientDto client, int userId)
-        {
-            string clientNameDummy = string.Empty, clientWebSite = string.Empty;
-            string addressLineDummy = string.Empty, addressCityDummy = string.Empty, addressIndexDummy = string.Empty;
-            int countryDummy = 0;
-            string phoneDummy = string.Empty;
-
+        public void UpdateClient(ClientDto clientDto)
+        {            
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                var clientToUpdate = context.Client.FirstOrDefault(c => c.Id == client.Id);
+                var clientToUpdate = context.Client.FirstOrDefault(c => c.Id == clientDto.Id);
                 if (clientToUpdate != null)
                 {
-
-                    clientToUpdate.Name = clientNameDummy;
-                    clientToUpdate.WebSite = clientWebSite;
-                    clientToUpdate.AddressLine = addressLineDummy;
-                    clientToUpdate.AddressCity = addressCityDummy;
-                    clientToUpdate.AddressIndex = addressIndexDummy;
-                    clientToUpdate.CountryId = countryDummy;
-                    clientToUpdate.TelNo = phoneDummy;
-                    clientToUpdate.CreatedBy = userId;
-
-                    context.Client.Update(clientToUpdate);
+                    context.Client.Update(clientDto.ToData());
                     context.SaveChanges();
                 }
             }

@@ -31,48 +31,22 @@ namespace MyWebRecruit.Services.Services
         }
 
         public void CreateJob(JobDto jobDto)
-        {            
+        {
             using (var context = new MyWebRecruitDataBaseContext())
-            {                
+            {
                 context.JobGeneral.Add(jobDto.ToData());
                 context.SaveChanges();
             }
         }
 
-        public void UpdateJob(JobDto job)
+        public void UpdateJob(JobDto jobDto)
         {
-            string nameDummy = string.Empty;
-            string addressLineDummy = string.Empty, addressCityDummy = string.Empty,
-                addressIndexDummy = string.Empty;
-            string jobCurrencyDummy = string.Empty;
-            string jobStatusDummy = string.Empty;
-            DateTime startDateDummy = DateTime.Now, endDateDummy = DateTime.Now;
-            short noReqDummy = 0;
-            string categoryDummy = string.Empty;
-            decimal salaryDummy = 0;
-            byte intershipYNDummy = 0;
-            int payMethodDummy = 0;
-
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                var jobToUpdate = context.JobGeneral.FirstOrDefault(j => j.Id == job.Id);
+                var jobToUpdate = context.JobGeneral.FirstOrDefault(j => j.Id == jobDto.Id);
                 if (jobToUpdate != null)
                 {
-                    jobToUpdate.Name = nameDummy;
-                    jobToUpdate.AddressLine = addressLineDummy;
-                    jobToUpdate.AddressCity = addressCityDummy;
-                    jobToUpdate.AddressIndex = addressIndexDummy;
-                    jobToUpdate.JobCurrency = jobCurrencyDummy;
-                    jobToUpdate.JobStatus = jobStatusDummy;
-                    jobToUpdate.StartDt = startDateDummy;
-                    jobToUpdate.EndDt = endDateDummy;
-                    jobToUpdate.NoReq = noReqDummy;
-                    jobToUpdate.Category = categoryDummy;
-                    jobToUpdate.Salary = salaryDummy;
-                    jobToUpdate.IntershipYn = intershipYNDummy;
-                    jobToUpdate.PayMethod = payMethodDummy;
-
-                    context.JobGeneral.Add(jobToUpdate);
+                    context.JobGeneral.Add(jobDto.ToData());
                     context.SaveChanges();
                 }
             }

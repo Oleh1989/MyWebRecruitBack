@@ -18,8 +18,6 @@ namespace MyWebRecruit.Services.Services
 
         }
 
-
-
         public IQueryable<ContactDto> GetContactList(ClientDto client)
         {
             IQueryable<ContactDto> contacts;
@@ -42,9 +40,17 @@ namespace MyWebRecruit.Services.Services
             }  
         }
 
-        public void UpdateContact(ContactDto contact)
+        public void UpdateContact(ContactDto contactDto)
         {
-            
+            using (var context = new MyWebRecruitDataBaseContext())
+            {
+                var contactToUpdate = context.Contact.FirstOrDefault(x => x.Id == contactDto.Id);
+                if (contactToUpdate != null)
+                {
+                    context.Contact.Update(contactDto.ToData());
+                    context.SaveChanges();
+                }
+            }
         }
 
         public void DeleteContact(ContactDto contact)

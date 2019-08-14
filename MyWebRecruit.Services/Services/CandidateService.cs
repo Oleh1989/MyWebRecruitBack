@@ -40,42 +40,15 @@ namespace MyWebRecruit.Services.Services
             }
         }
 
-        public void UpdateCandidate(CandidateDto candidate, int userId)
+        public void UpdateCandidate(CandidateDto candidateDto)
         {
-            string firstNameDummy = string.Empty, lastNameDummy = string.Empty, middleNameDummy = string.Empty;
-            string emailDummy = string.Empty;
-            string telephoneDummy = string.Empty, alterTelephoneDummy = string.Empty;
-            byte disturbYN = 0;
-            string facebookDummy = string.Empty, linkedinDummy = string.Empty, skypeDummy = string.Empty;
-            DateTime dobDummy = DateTime.Now;
-            int ageDummy = DateTime.Now.Year - dobDummy.Year;
-
-            string AddressLineDummy = string.Empty, addressCityDummy = string.Empty, addressIndex = string.Empty;
-
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                var candidateToUpdate = context.Candidate.FirstOrDefault(c => c.Id == candidate.Id);
+                var candidateToUpdate = context.Candidate.FirstOrDefault(c => c.Id == candidateDto.Id);
                 if (candidateToUpdate != null)
                 {
-                    candidateToUpdate.FirstName = firstNameDummy;
-                    candidateToUpdate.LastName = lastNameDummy;
-                    candidateToUpdate.MiddleName = middleNameDummy;
-                    candidateToUpdate.Email = emailDummy;
-                    candidateToUpdate.TelNo = telephoneDummy;
-                    candidateToUpdate.AlterTelNo = alterTelephoneDummy;
-                    candidateToUpdate.DisturbYn = disturbYN;
-                    candidateToUpdate.Facebook = facebookDummy;
-                    candidateToUpdate.Linkedin = linkedinDummy;
-                    candidateToUpdate.Skype = skypeDummy;
-                    candidateToUpdate.Dob = dobDummy;
-                    candidateToUpdate.Age = ageDummy;
-                    candidateToUpdate.AddressLine = AddressLineDummy;
-                    candidateToUpdate.AddressCity = addressCityDummy;
-                    candidateToUpdate.AddressIndex = addressIndex;
-
-                    context.Candidate.Update(candidateToUpdate);
+                    context.Candidate.Update(candidateDto.ToData());
                     context.SaveChanges();
-
                 }
             }
         }

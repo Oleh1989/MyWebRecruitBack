@@ -11,7 +11,7 @@ namespace MyWebRecruit.Services.Interfaces
     {
         IQueryable<AssignmentDto> GetAssignmentList();
         void CreateAssignment(AssignmentDto assignmentDto);
-        void UpdateAssignment(AssignmentDto assignment);
+        void UpdateAssignment(AssignmentDto assignmentDto);
         void DeleteAssignment(AssignmentDto assignment);
     }
 }

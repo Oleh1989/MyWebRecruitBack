@@ -33,45 +33,32 @@ namespace MyWebRecruit.Services.Services
         }
 
         public void CreateAssignment(AssignmentDto assignmentDto)
-        {            
+        {
             using (var context = new MyWebRecruitDataBaseContext())
-            {                
+            {
                 context.Assignment.Add(assignmentDto.ToData());
                 context.SaveChanges();
             }
         }
 
-        public void UpdateAssignment(AssignmentDto assignment)
+        public void UpdateAssignment(AssignmentDto assignmentDto)
         {
-            DateTime satrtDtDummy = DateTime.Now, endDtDummy = DateTime.Now;
-            decimal salaryDummy = 0;
-            int assigTypeDummy = 0;
-            string jobNameDummy = string.Empty;
-            string reasonLeaveDummy = string.Empty;
-
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                var assignmentToUpdate = context.Assignment.FirstOrDefault(x => x.Id == assignment.Id);
+                var assignmentToUpdate = context.Assignment.FirstOrDefault(x => x.Id == assignmentDto.Id);
                 if (assignmentToUpdate != null)
                 {
-                    assignmentToUpdate.StartDt = satrtDtDummy;
-                    assignmentToUpdate.EndDt = endDtDummy;
-                    assignmentToUpdate.Salary = salaryDummy;
-                    assignmentToUpdate.AssigType = assigTypeDummy;
-                    assignmentToUpdate.JobName = jobNameDummy;
-                    assignmentToUpdate.ReasonLeave = reasonLeaveDummy;
-
-                    context.Assignment.Update(assignmentToUpdate);
+                    context.Assignment.Update(assignmentDto.ToData());
                     context.SaveChanges();
                 }
             }
         }
 
-        public void DeleteAssignment(AssignmentDto assignment)
+        public void DeleteAssignment(AssignmentDto assignmentDto)
         {
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                var assignmentToDelete = context.Assignment.FirstOrDefault(x => x.Id == assignment.Id);
+                var assignmentToDelete = context.Assignment.FirstOrDefault(x => x.Id == assignmentDto.Id);
                 if (assignmentToDelete != null)
                 {
                     assignmentToDelete.IsDeleted = true;

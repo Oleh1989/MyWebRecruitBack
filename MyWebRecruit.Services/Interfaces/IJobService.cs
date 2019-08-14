@@ -11,7 +11,7 @@ namespace MyWebRecruit.Services.Interfaces
     {
         IQueryable<JobDto> GetJobList(ContactDto contact);
         void CreateJob(JobDto jobDto);
-        void UpdateJob(JobDto job);
+        void UpdateJob(JobDto jobDto);
         void DeleteJob(JobDto job);
     }
 }

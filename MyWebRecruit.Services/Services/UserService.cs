@@ -33,7 +33,7 @@ namespace MyWebRecruit.Services
         }
 
         public void CreateUser(UserDto userDto)
-        {            
+        {
             using (var context = new MyWebRecruitDataBaseContext())
             {
                 context.User.Add(userDto.ToData());
@@ -41,27 +41,15 @@ namespace MyWebRecruit.Services
             }
         }
 
-        public void UpdateUser(UserDto user)
+        public void UpdateUser(UserDto userDto)
         {
-            string userNameDummy = string.Empty, userEmailDummy = string.Empty, userPasswordDummy = string.Empty;
-            byte isAdminDummy = 0;
             using (var context = new MyWebRecruitDataBaseContext())
             {
-                // Get entity by id
-                var userToUpdate = context.User.FirstOrDefault(u => u.Id == user.Id);
+                var userToUpdate = context.User.FirstOrDefault(u => u.Id == userDto.Id);
 
                 if (userToUpdate != null)
                 {
-                    userToUpdate.UserName = userNameDummy;
-                    userToUpdate.UserEmail = userEmailDummy;
-                    userToUpdate.Password = userPasswordDummy;
-                    userToUpdate.CreateTime = DateTime.Now;
-                    userToUpdate.AdminYn = isAdminDummy;
-
-                    // Update entity in DbSet
-                    context.User.Update(userToUpdate);
-
-                    // Save changes in DbSet;
+                    context.User.Update(userDto.ToData());
                     context.SaveChanges();
                 }
             }
