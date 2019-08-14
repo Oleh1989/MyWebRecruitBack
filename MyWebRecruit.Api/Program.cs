@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MyWebRecruit.Controllers;
 
-namespace MyWebRecruit
+namespace MyWebRecruit.Api
 {
     public class Program
     {

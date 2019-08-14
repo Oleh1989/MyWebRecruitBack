@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit", "MyWebRecruit\MyWebRecruit.csproj", "{A12BED42-4BC5-4370-83CF-9AA88C666F16}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Domain", "MyWebRecruit.Domain\MyWebRecruit.Domain.csproj", "{452DEB7F-230F-403D-84F2-94E75B93698E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Api", "MyWebRecruit\MyWebRecruit.Api.csproj", "{A12BED42-4BC5-4370-83CF-9AA88C666F16}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Data", "MyWebRecruit.Data\MyWebRecruit.Data.csproj", "{F0399E9C-DC4C-46C2-A671-8B579ABC786D}"
 EndProject
@@ -15,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Front", "MyWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.ViewModels", "MyWebRecruit.ViewModels\MyWebRecruit.ViewModels.csproj", "{561FEDBD-331B-47BC-B5FF-324C124658A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebRecruit.Services", "MyWebRecruit.Services\MyWebRecruit.Services.csproj", "{3D81229A-4B2E-433B-B9DE-4B61FCD26217}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Services", "MyWebRecruit.Services\MyWebRecruit.Services.csproj", "{3D81229A-4B2E-433B-B9DE-4B61FCD26217}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +25,6 @@ Global
 		{A12BED42-4BC5-4370-83CF-9AA88C666F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A12BED42-4BC5-4370-83CF-9AA88C666F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A12BED42-4BC5-4370-83CF-9AA88C666F16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{452DEB7F-230F-403D-84F2-94E75B93698E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{452DEB7F-230F-403D-84F2-94E75B93698E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{452DEB7F-230F-403D-84F2-94E75B93698E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{452DEB7F-230F-403D-84F2-94E75B93698E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F0399E9C-DC4C-46C2-A671-8B579ABC786D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F0399E9C-DC4C-46C2-A671-8B579ABC786D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0399E9C-DC4C-46C2-A671-8B579ABC786D}.Release|Any CPU.ActiveCfg = Release|Any CPU

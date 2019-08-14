@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyWebRecruit.DataBase\MyWebRecruit.DataBase.sqlproj" />
-    <ProjectReference Include="..\MyWebRecruit.Domain\MyWebRecruit.Domain.csproj" />
   </ItemGroup>
 
 </Project>

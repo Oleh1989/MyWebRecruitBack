@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyWebRecruit.Controllers
+namespace MyWebRecruit.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

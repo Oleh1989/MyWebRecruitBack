@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 
-namespace MyWebRecruit
+namespace MyWebRecruit.Api
 {
     public class Startup
     {
@@ -34,12 +34,12 @@ namespace MyWebRecruit
 
         // This method gets called by the runtime. Use this method to add services to the container.
 
-        //public void ConfigureServices(IServiceCollection services)
-        //{
-        //    string connection = Configuration.GetConnectionString("DefaultConnection");
-        //    services.AddDbContext<MyWebRecruitDataBaseContext>(options => options.UseSqlServer(connection));
-        //    services.AddMvc();
-        //}
+        public void ConfigureServices(IServiceCollection services)
+        {
+            //string connection = Configuration.GetConnectionString("DefaultConnection");
+            //services.AddDbContext<MyWebRecruitDataBaseContext>(options => options.UseSqlServer(connection));
+            services.AddMvc();
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

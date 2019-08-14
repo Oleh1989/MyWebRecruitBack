@@ -5,41 +5,41 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyWebRecruit.Controllers
+namespace MyWebRecruit.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CvsController : ControllerBase
+    public class CandidatesController : ControllerBase
     {
-        // GET api/cvs
+        // GET api/candidates
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "Cv1", "Cv2" };
+            return new string[] { "Candidate1", "Candidate2" };
         }
 
-        // GET api/cvs/id
+        // GET api/candidates/id
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "CvId";
+            return "CandidateId";
         }
 
-        // POST api/cvs
+        // POST api/candidates
         [HttpPost]
         public void Post([FromBody] string value)
         {
 
         }
 
-        // PUT api/cvs/id
+        // PUT api/candidates/id
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
 
         }
 
-        // DELETE api/cvs/id
+        // DELETE api/candidates/id
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
