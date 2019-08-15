@@ -8,65 +8,38 @@ using MyWebRecruit.Data.Entities;
 using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Interfaces;
 using MyWebRecruit.Services.Extensions;
+using MyWebRecruit.Data.UnitOfWorks;
 
 namespace MyWebRecruit.Services.Services
 {
     public class AssignmentService : BaseService, IAssignmentService
     {
-        public AssignmentService(MyWebRecruitDataBaseContext dataBaseContext) : base(dataBaseContext)
+        public AssignmentService(IUnitOfWork uow) : base(uow)
         {
 
         }
 
-        public IQueryable<AssignmentDto> GetAssignmentList()
+        public List<AssignmentDto> GetAssignmentList()
         {
-            IQueryable<AssignmentDto> assignments;
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                assignments = context.Assignment
-                    .Cast<AssignmentDto>()
-                    .Where(x => !x.IsDeleted)
-                    .OrderBy(x => x.JobName);
-            }
-
-            return assignments;
+            return _uow.AssignmentRepository.GetAll().Select(x => x.ToDto()).ToList();
         }
 
         public void CreateAssignment(AssignmentDto assignmentDto)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                context.Assignment.Add(assignmentDto.ToData());
-                context.SaveChanges();
-            }
+            _uow.AssignmentRepository.Add(assignmentDto.ToData());
+            _uow.Save();
         }
 
         public void UpdateAssignment(AssignmentDto assignmentDto)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                var assignmentToUpdate = context.Assignment.FirstOrDefault(x => x.Id == assignmentDto.Id);
-                if (assignmentToUpdate != null)
-                {
-                    context.Assignment.Update(assignmentDto.ToData());
-                    context.SaveChanges();
-                }
-            }
+            _uow.AssignmentRepository.Update(assignmentDto.ToData());
+            _uow.Save();
         }
 
-        public void DeleteAssignment(AssignmentDto assignmentDto)
+        public void DeleteAssignment(int id)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                var assignmentToDelete = context.Assignment.FirstOrDefault(x => x.Id == assignmentDto.Id);
-                if (assignmentToDelete != null)
-                {
-                    assignmentToDelete.IsDeleted = true;
-
-                    context.Assignment.Update(assignmentToDelete);
-                    context.SaveChanges();
-                }
-            }
+            _uow.AssignmentRepository.Delete(id);
+            _uow.Save();
         }
     }
 }

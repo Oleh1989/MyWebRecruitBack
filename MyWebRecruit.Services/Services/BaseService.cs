@@ -1,15 +1,16 @@
 ﻿using System;
 using MyWebRecruit.Data.Entities;
+using MyWebRecruit.Data.UnitOfWorks;
 
 namespace MyWebRecruit.Services.Services
 {
     public class BaseService
     {
-        protected MyWebRecruitDataBaseContext DataBaseContext { get; }
+        protected readonly IUnitOfWork _uow;
 
-        protected BaseService(MyWebRecruitDataBaseContext dataBaseContext)
+        public BaseService(IUnitOfWork uow)
         {
-            DataBaseContext = dataBaseContext ?? throw new ArgumentNullException(nameof(dataBaseContext));
+            _uow = uow ?? throw new ArgumentNullException(nameof(uow));
         }
     }
 }

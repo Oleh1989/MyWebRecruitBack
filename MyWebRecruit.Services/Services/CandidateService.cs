@@ -8,63 +8,37 @@ using MyWebRecruit.Data.Entities;
 using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Interfaces;
 using MyWebRecruit.Services.Extensions;
+using MyWebRecruit.Data.UnitOfWorks;
 
 namespace MyWebRecruit.Services.Services
 {
     public class CandidateService : BaseService, ICandidateService
     {
-        public CandidateService(MyWebRecruitDataBaseContext dataBaseContext) : base(dataBaseContext)
+        public CandidateService(IUnitOfWork uow) : base(uow)
         {
 
         }
 
-        public IQueryable<CandidateDto> GetCandidateList(UserDto user)
+        public List<CandidateDto> GetCandidateList(UserDto user)
         {
-            IQueryable<CandidateDto> candidates;
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                candidates = context.Candidate.Cast<CandidateDto>()
-                    .Where(x => !x.IsDeleted && x.CreatedBy == user.Id)
-                    .OrderBy(x => x.LastName);
-            }
-
-            return candidates;
+            return _uow.CandidateRepository.GetAll().Select(x => x.ToDto()).ToList();
         }
 
         public void CreateCandidate(CandidateDto candidateDto)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                context.Candidate.Add(candidateDto.ToData());
-                context.SaveChanges();
-            }
+            _uow.CandidateRepository.Add(candidateDto.ToData());
+            _uow.Save();
         }
 
         public void UpdateCandidate(CandidateDto candidateDto)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                var candidateToUpdate = context.Candidate.FirstOrDefault(c => c.Id == candidateDto.Id);
-                if (candidateToUpdate != null)
-                {
-                    context.Candidate.Update(candidateDto.ToData());
-                    context.SaveChanges();
-                }
-            }
+            _uow.CandidateRepository.Update(candidateDto.ToData());
+            _uow.Save();
         }
-        public void DeleteCandidate(CandidateDto candidate)
+        public void DeleteCandidate(int id)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                var candidateToDelete = context.Candidate.FirstOrDefault(c => c.Id == candidate.Id);
-                if (candidateToDelete != null)
-                {
-                    candidateToDelete.IsDeleted = true;
-
-                    context.Candidate.Update(candidateToDelete);
-                    context.SaveChanges();
-                }
-            }
+            _uow.CandidateRepository.Delete(id);
+            _uow.Save();            
         }
     }
 }

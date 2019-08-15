@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyWebRecruit.Data.Entities
 {
-    interface IIdentified
+    public interface IIdentified
     {
         int Id { get; set; }
     }

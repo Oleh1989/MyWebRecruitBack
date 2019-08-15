@@ -8,63 +8,38 @@ using MyWebRecruit.Data.Entities;
 using MyWebRecruit.Services.Interfaces;
 using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Extensions;
+using MyWebRecruit.Data.UnitOfWorks;
 
 namespace MyWebRecruit.Services.Services
 {
     public class JobService : BaseService, IJobService
     {
-        public JobService(MyWebRecruitDataBaseContext dataBaseContext) : base(dataBaseContext)
+        public JobService(IUnitOfWork uow) : base(uow)
         {
 
         }
 
-        public IQueryable<JobDto> GetJobList(ContactDto contact)
+        public List<JobDto> GetJobList(ContactDto contact)
         {
-            IQueryable<JobDto> jobs;
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                jobs = context.JobGeneral.Cast<JobDto>()
-                    .Where(x => !x.IsDeleted && x.ContactId == contact.Id)
-                    .OrderBy(x => x.Name);
-            }
-            return jobs;
+            return _uow.JobRepository.GetAll().Select(x => x.ToDto()).ToList();
         }
 
         public void CreateJob(JobDto jobDto)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                context.JobGeneral.Add(jobDto.ToData());
-                context.SaveChanges();
-            }
+            _uow.JobRepository.Add(jobDto.ToData());
+            _uow.Save();
         }
 
         public void UpdateJob(JobDto jobDto)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                var jobToUpdate = context.JobGeneral.FirstOrDefault(j => j.Id == jobDto.Id);
-                if (jobToUpdate != null)
-                {
-                    context.JobGeneral.Add(jobDto.ToData());
-                    context.SaveChanges();
-                }
-            }
+            _uow.JobRepository.Update(jobDto.ToData());
+            _uow.Save();
         }
 
-        public void DeleteJob(JobDto job)
+        public void DeleteJob(int id)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                var jobToDelete = context.JobGeneral.FirstOrDefault(j => j.Id == job.Id);
-                if (jobToDelete != null)
-                {
-                    jobToDelete.IsDeleted = true;
-
-                    context.JobGeneral.Update(jobToDelete);
-                    context.SaveChanges();
-                }
-            }
+            _uow.JobRepository.Delete(id);
+            _uow.Save();
         }
     }
 }

@@ -8,65 +8,37 @@ using MyWebRecruit.Data.Entities;
 using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Interfaces;
 using MyWebRecruit.Services.Extensions;
+using MyWebRecruit.Data.UnitOfWorks;
 
 namespace MyWebRecruit.Services.Services
 {
     class ClientService : BaseService, IClientService
     {
-        public ClientService(MyWebRecruitDataBaseContext dataBaseContext) : base(dataBaseContext)
+        public ClientService(IUnitOfWork uow) : base(uow)
         {
 
         }
 
-        public IQueryable<ClientDto> GetClientList(UserDto user)
+        public List<ClientDto> GetClientList(UserDto user)
         {
-            IQueryable<ClientDto> clients;
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                clients = context.Client
-                    .Cast<ClientDto>()
-                    .Where(x => !x.IsDeleted && x.CreatedBy == user.Id)
-                    .OrderBy(x => x.Name);
-            }
-
-            return clients;
+            return _uow.ClientRepository.GetAll().Select(x => x.ToDto()).ToList();
         }
 
         public void CreateClient(ClientDto clientDto)
-        {            
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                context.Client.Add(clientDto.ToData());
-                context.SaveChanges();
-            }
+        {
+            _uow.ClientRepository.Add(clientDto.ToData());
+            _uow.Save();
         }
 
         public void UpdateClient(ClientDto clientDto)
-        {            
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                var clientToUpdate = context.Client.FirstOrDefault(c => c.Id == clientDto.Id);
-                if (clientToUpdate != null)
-                {
-                    context.Client.Update(clientDto.ToData());
-                    context.SaveChanges();
-                }
-            }
+        {
+            _uow.ClientRepository.Update(clientDto.ToData());
         }
 
-        public void DeleteClient(ClientDto client)
+        public void DeleteClient(int id)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                var clientToDelete = context.Client.FirstOrDefault(c => c.Id == client.Id);
-                if (clientToDelete != null)
-                {
-                    clientToDelete.IsDeleted = true;
-
-                    context.Client.Update(clientToDelete);
-                    context.SaveChanges();
-                }
-            }
+            _uow.ClientRepository.Delete(id);
+            _uow.Save();
         }
     }
 }

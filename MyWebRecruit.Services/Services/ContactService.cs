@@ -8,54 +8,38 @@ using MyWebRecruit.Data.Entities;
 using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Interfaces;
 using MyWebRecruit.Services.Extensions;
+using MyWebRecruit.Data.UnitOfWorks;
 
 namespace MyWebRecruit.Services.Services
 {
     public class ContactService : BaseService, IContactService
     {
-        public ContactService(MyWebRecruitDataBaseContext dataBaseContext) : base(dataBaseContext)
+        public ContactService(IUnitOfWork uow) : base(uow)
         {
 
         }
 
-        public IQueryable<ContactDto> GetContactList(ClientDto client)
+        public List<ContactDto> GetContactList(ClientDto client)
         {
-            IQueryable<ContactDto> contacts;
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                contacts = context.Contact.Cast<ContactDto>()                    
-                    .Where(x => !x.IsDeleted && x.ClientId == client.CountryId)
-                    .OrderBy(x => x.LastName)
-                    .AsQueryable();
-            }
-            return contacts;
+            return _uow.ContactRepository.GetAll().Select(x => x.ToDto()).ToList();
         }
 
         public void ContactCreate(ContactDto contactDto)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                context.Contact.Add(contactDto.ToData());
-                context.SaveChanges();
-            }  
+            _uow.ContactRepository.Add(contactDto.ToData());
+            _uow.Save();
         }
 
         public void UpdateContact(ContactDto contactDto)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                var contactToUpdate = context.Contact.FirstOrDefault(x => x.Id == contactDto.Id);
-                if (contactToUpdate != null)
-                {
-                    context.Contact.Update(contactDto.ToData());
-                    context.SaveChanges();
-                }
-            }
+            _uow.ContactRepository.Update(contactDto.ToData());
+            _uow.Save();
         }
 
-        public void DeleteContact(ContactDto contact)
+        public void DeleteContact(int id)
         {
-            
+            _uow.ContactRepository.Delete(id);
+            _uow.Save();
         }
     }
 }

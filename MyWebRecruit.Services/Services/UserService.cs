@@ -9,69 +9,38 @@ using MyWebRecruit.Services.Services;
 using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Interfaces;
 using MyWebRecruit.Services.Extensions;
+using MyWebRecruit.Data.UnitOfWorks;
 
 namespace MyWebRecruit.Services
 {
     class UserService : BaseService, IUserService
     {
-        public UserService(MyWebRecruitDataBaseContext dataBaseContext) : base(dataBaseContext)
+        public UserService(IUnitOfWork uow) : base(uow)
         {
 
         }
 
-        public IQueryable<UserDto> GetUserList()
+        public List<UserDto> GetUserList()
         {
-            IQueryable<UserDto> users;
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                users = context.User
-                    .Cast<UserDto>()
-                    .Where(x => !x.IsDeleted)
-                    .OrderBy(x => x.UserName);
-            }
-            return users;
+            return _uow.UserRepository.GetAll().Select(x => x.ToDto()).ToList();
         }
 
         public void CreateUser(UserDto userDto)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                context.User.Add(userDto.ToData());
-                context.SaveChanges();
-            }
+            _uow.UserRepository.Add(userDto.ToData());
+            _uow.Save();
         }
 
         public void UpdateUser(UserDto userDto)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                var userToUpdate = context.User.FirstOrDefault(u => u.Id == userDto.Id);
-
-                if (userToUpdate != null)
-                {
-                    context.User.Update(userDto.ToData());
-                    context.SaveChanges();
-                }
-            }
+            _uow.UserRepository.Update(userDto.ToData());
+            _uow.Save();
         }
 
-        public void DeleteUser(UserDto user)
+        public void DeleteUser(int id)
         {
-            using (var context = new MyWebRecruitDataBaseContext())
-            {
-                // Get entity by id
-                var userToDelete = context.User.FirstOrDefault(u => u.Id == user.Id);
-                if (userToDelete != null)
-                {
-                    userToDelete.IsDeleted = true;
-
-                    // Update entity in DbSet
-                    context.User.Update(userToDelete);
-
-                    // Save changes in DbSet;
-                    context.SaveChanges();
-                }
-            }
+            _uow.UserRepository.Delete(id);
+            _uow.Save();
         }
     }
 }
