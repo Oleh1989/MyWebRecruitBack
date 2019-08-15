@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyWebRecruit.Api\MyWebRecruit.Api.csproj" />
+    <ProjectReference Include="..\MyWebRecruit.Data\MyWebRecruit.Data.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,21 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit", "MyWebRecruit\MyWebRecruit.csproj", "{A12BED42-4BC5-4370-83CF-9AA88C666F16}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Domain", "MyWebRecruit.Domain\MyWebRecruit.Domain.csproj", "{452DEB7F-230F-403D-84F2-94E75B93698E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Contracts", "MyWebRecruit.Contracts\MyWebRecruit.Contracts.csproj", "{935D25B6-801C-4D1C-972B-25C4B2E9122F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Data", "MyWebRecruit.Data\MyWebRecruit.Data.csproj", "{F0399E9C-DC4C-46C2-A671-8B579ABC786D}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MyWebRecruit.DataBase", "MyWebRecruit.DataBase\MyWebRecruit.DataBase.sqlproj", "{AB0DD2B0-D9B2-4F82-8D2F-E15064CE99CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Front", "MyWebRecruit.Front\MyWebRecruit.Front.csproj", "{21DE7C2D-6A70-4F6C-9635-87E60AB45161}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebRecruit.ViewModels", "MyWebRecruit.ViewModels\MyWebRecruit.ViewModels.csproj", "{561FEDBD-331B-47BC-B5FF-324C124658A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.ViewModels", "MyWebRecruit.ViewModels\MyWebRecruit.ViewModels.csproj", "{561FEDBD-331B-47BC-B5FF-324C124658A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Services", "MyWebRecruit.Services\MyWebRecruit.Services.csproj", "{3D81229A-4B2E-433B-B9DE-4B61FCD26217}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebRecruit.Api", "MyWebRecruit.Api\MyWebRecruit.Api.csproj", "{92E9CD6B-200B-4E34-B7F1-3650F65D5A44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,18 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A12BED42-4BC5-4370-83CF-9AA88C666F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A12BED42-4BC5-4370-83CF-9AA88C666F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A12BED42-4BC5-4370-83CF-9AA88C666F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A12BED42-4BC5-4370-83CF-9AA88C666F16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{452DEB7F-230F-403D-84F2-94E75B93698E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{452DEB7F-230F-403D-84F2-94E75B93698E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{452DEB7F-230F-403D-84F2-94E75B93698E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{452DEB7F-230F-403D-84F2-94E75B93698E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{935D25B6-801C-4D1C-972B-25C4B2E9122F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{935D25B6-801C-4D1C-972B-25C4B2E9122F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{935D25B6-801C-4D1C-972B-25C4B2E9122F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{935D25B6-801C-4D1C-972B-25C4B2E9122F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F0399E9C-DC4C-46C2-A671-8B579ABC786D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F0399E9C-DC4C-46C2-A671-8B579ABC786D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0399E9C-DC4C-46C2-A671-8B579ABC786D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,6 +39,14 @@ Global
 		{561FEDBD-331B-47BC-B5FF-324C124658A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{561FEDBD-331B-47BC-B5FF-324C124658A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{561FEDBD-331B-47BC-B5FF-324C124658A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D81229A-4B2E-433B-B9DE-4B61FCD26217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D81229A-4B2E-433B-B9DE-4B61FCD26217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D81229A-4B2E-433B-B9DE-4B61FCD26217}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D81229A-4B2E-433B-B9DE-4B61FCD26217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92E9CD6B-200B-4E34-B7F1-3650F65D5A44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E9CD6B-200B-4E34-B7F1-3650F65D5A44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92E9CD6B-200B-4E34-B7F1-3650F65D5A44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92E9CD6B-200B-4E34-B7F1-3650F65D5A44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

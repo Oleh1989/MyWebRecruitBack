@@ -11,9 +11,13 @@
     [LINKEDIN]     NVARCHAR (100) NULL,
     [SKYPE]        NVARCHAR (100) NULL,
     [DOB]          DATE           NULL,
-    [AGE]          INT            NULL,
     [CREATED_BY]   INT            NOT NULL,
+    [ADDRESS_LINE] NCHAR(100) NULL, 
+    [ADDRESS_CITY] NCHAR(20) NULL, 
+    [ADDRESS_INDEX] NCHAR(10) NULL, 
+    [COUNTRY_ID] INT NULL, 
     CONSTRAINT [PK_Candidate] PRIMARY KEY CLUSTERED ([CANDIDATE_ID] ASC),
-    CONSTRAINT [FK_Candidate_User] FOREIGN KEY ([CREATED_BY]) REFERENCES [dbo].[User] ([USER_ID])
+    CONSTRAINT [FK_Candidate_User] FOREIGN KEY ([CREATED_BY]) REFERENCES [dbo].[User] ([USER_ID]), 
+    CONSTRAINT [FK_Candidate_Country] FOREIGN KEY ([COUNTRY_ID]) REFERENCES [dbo].[Country]([COUNTRY_ID])
 );
 
