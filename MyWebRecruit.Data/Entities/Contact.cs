@@ -22,6 +22,9 @@ namespace MyWebRecruit.Data.Entities
         public string Department { get; set; }
         public string JobTitle { get; set; }
 
+        // added manualy to service working properly with id
+        public int ClientId { get; set; }
+
         // IDeletable interface
         public bool IsDeleted { get; set; }
 

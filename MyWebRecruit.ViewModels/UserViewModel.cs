@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyWebRecruit.ViewModels
 {
-    class UserViewModel
+    public class UserViewModel
     {
         [Required(ErrorMessage = "Field shouldn't be empty")]
         [MaxLength(256)]

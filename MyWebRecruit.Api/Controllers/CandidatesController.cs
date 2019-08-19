@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyWebRecruit.Services.Interfaces;
+using MyWebRecruit.ViewModels;
 
 namespace MyWebRecruit.Api.Controllers
 {
@@ -11,18 +14,26 @@ namespace MyWebRecruit.Api.Controllers
     [ApiController]
     public class CandidatesController : ControllerBase
     {
+        private readonly ICandidateService _candidateService;
+
+        public CandidatesController(ICandidateService candidateService)
+        {
+            _candidateService = candidateService;
+        }
+
         // GET api/candidates
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<CandidateViewModel>> Get()
         {
-            return new string[] { "Candidate1", "Candidate2" };
+            return _candidateService.GetCandidateList(1).Select(entity => Mapper.Map<CandidateViewModel>(entity)).ToList();
         }
 
         // GET api/candidates/id
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult Get(int id)
         {
-            return "CandidateId";
+            var entity = _candidateService.GetCandidate(id);
+            return Ok(new ObjectResult(Mapper.Map<CandidateViewModel>(entity)));
         }
 
         // POST api/candidates

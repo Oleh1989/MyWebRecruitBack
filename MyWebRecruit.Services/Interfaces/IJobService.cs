@@ -9,7 +9,7 @@ namespace MyWebRecruit.Services.Interfaces
 {
     public interface IJobService
     {
-        List<JobDto> GetJobList(ContactDto contact);
+        List<JobDto> GetJobList(int contactId);
         JobDto GetJob(int id);
         void CreateJob(JobDto jobDto);
         void UpdateJob(JobDto jobDto);

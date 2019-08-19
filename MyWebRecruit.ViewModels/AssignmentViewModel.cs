@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyWebRecruit.ViewModels
 {
-    class AssignmentViewModel
+    public class AssignmentViewModel
     {
         public int? Id { get; set; }
 

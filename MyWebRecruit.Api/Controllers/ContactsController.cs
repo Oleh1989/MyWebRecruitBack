@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using MyWebRecruit.ViewModels;
+using MyWebRecruit.Services.Interfaces;
 
 namespace MyWebRecruit.Api.Controllers
 {
@@ -11,18 +14,26 @@ namespace MyWebRecruit.Api.Controllers
     [ApiController]
     public class ContactsController : ControllerBase
     {
+        private readonly IContactService _contactService;
+
+        public ContactsController(IContactService contactService)
+        {
+            _contactService = contactService;
+        }
+
         // GET api/contacts
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<ContactViewModel>> Get()
         {
-            return new string[] { "Contact1", "Contact2" };
+            return _contactService.GetContactList(1).Select(entity => Mapper.Map<ContactViewModel>(entity)).ToList();
         }
 
         // GET api/contacts/id
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult Get(int id)
         {
-            return "ContactId";
+            var entity = _contactService.GetContact(id);
+            return Ok(new ObjectResult(Mapper.Map<ContactViewModel>(entity)));
         }
 
         // POST api/contacts

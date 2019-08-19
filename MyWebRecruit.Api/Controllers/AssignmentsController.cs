@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyWebRecruit.Services.Interfaces;
+using MyWebRecruit.ViewModels;
 
 namespace MyWebRecruit.Api.Controllers
 {
@@ -11,18 +14,26 @@ namespace MyWebRecruit.Api.Controllers
     [ApiController]
     public class AssignmentsController : ControllerBase
     {
+        private readonly IAssignmentService _assignmentService;
+
+        public AssignmentsController(IAssignmentService assignmentService)
+        {
+            _assignmentService = assignmentService;
+        }
+
         // GET api/assignments
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<AssignmentViewModel>> Get()
         {
-            return new string[] { "Assignment1", "Assignment2" };
+            return _assignmentService.GetAssignmentList().Select(entity => Mapper.Map<AssignmentViewModel>(entity)).ToList();
         }
 
         // GET api/assignments/id
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult Get(int id)
         {
-            return "AssignmentId";
+            var entity = _assignmentService.GetAssignment(id);
+            return Ok(new ObjectResult(Mapper.Map<AssignmentViewModel>(entity)));
         }
 
         // POST api/assignments

@@ -19,9 +19,11 @@ namespace MyWebRecruit.Services.Services
 
         }
 
-        public List<ContactDto> GetContactList(ClientDto client)
+        public List<ContactDto> GetContactList(int clientId)
         {
-            return _uow.ContactRepository.GetAll().Select(x => x.ToDto()).ToList();
+            return _uow.ContactRepository.GetAll()
+                .Where(x => x.ClientId == clientId)
+                .Select(x => x.ToDto()).ToList();
         }
 
         public ContactDto GetContact(int id)

@@ -19,9 +19,11 @@ namespace MyWebRecruit.Services.Services
 
         }
 
-        public List<JobDto> GetJobList(ContactDto contact)
+        public List<JobDto> GetJobList(int contactId)
         {
-            return _uow.JobRepository.GetAll().Select(x => x.ToDto()).ToList();
+            return _uow.JobRepository.GetAll()
+                .Where(x => x.ContactId == contactId)
+                .Select(x => x.ToDto()).ToList();
         }
 
         public JobDto GetJob(int id)

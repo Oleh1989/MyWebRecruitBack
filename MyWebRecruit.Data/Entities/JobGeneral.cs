@@ -25,7 +25,8 @@ namespace MyWebRecruit.Data.Entities
 
         // IDeletable interface
         public bool IsDeleted { get; set; }
-
+        // added manualy to service working properly with id
+        public int ContactId { get; set; }
 
         public string JobCurrency { get; set; }
         public string JobStatus { get; set; }

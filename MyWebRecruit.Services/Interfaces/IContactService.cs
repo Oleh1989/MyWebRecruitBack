@@ -9,7 +9,7 @@ namespace MyWebRecruit.Services.Interfaces
 {
     public interface IContactService
     {
-        List<ContactDto> GetContactList(ClientDto client);
+        List<ContactDto> GetContactList(int clientId);
         ContactDto GetContact(int id);
         void ContactCreate(ContactDto contactDto);
         void UpdateContact(ContactDto contactDto);
