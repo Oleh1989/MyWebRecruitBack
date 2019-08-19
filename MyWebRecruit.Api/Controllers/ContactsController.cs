@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using MyWebRecruit.ViewModels;
 using MyWebRecruit.Services.Interfaces;
+using MyWebRecruit.Services.Entities;
 
 namespace MyWebRecruit.Api.Controllers
 {
@@ -38,23 +39,26 @@ namespace MyWebRecruit.Api.Controllers
 
         // POST api/contacts
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Create(ContactViewModel entity)
         {
-
+            _contactService.ContactCreate(Mapper.Map<ContactDto>(entity));
+            return Ok();
         }
 
         // PUT api/contacts/id
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Update(ContactViewModel entity)
         {
-
+            _contactService.UpdateContact(Mapper.Map<ContactDto>(entity));
+            return Ok();
         }
 
         // DELETE api/contacts/id
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-
+            _contactService.DeleteContact(id);
+            return Ok();
         }
     }
 }

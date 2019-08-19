@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyWebRecruit.Services.Entities;
 using MyWebRecruit.Services.Interfaces;
 using MyWebRecruit.ViewModels;
 
@@ -38,23 +39,26 @@ namespace MyWebRecruit.Api.Controllers
 
         // POST api/clients
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Create(ClientViewModel entity)
         {
-
+            _clientService.CreateClient(Mapper.Map<ClientDto>(entity));
+            return Ok();
         }
 
         // PUT api/clients/id
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Update(ClientViewModel entity)
         {
-
+            _clientService.UpdateClient(Mapper.Map<ClientDto>(entity));
+            return Ok();
         }
 
         // DELETE api/clients/id
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-
+            _clientService.DeleteClient(id);
+            return Ok();
         }
     }
 }
