@@ -2,23 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Configuration;
-using MyWebRecruit.Api;
 
 namespace MyWebRecruit.Data.Entities
 {
     public partial class MyWebRecruitDataBaseContext : DbContext
     {
-        public MyWebRecruitDataBaseContext()
-        {
-        }
-
-        public static string GetConnectionString()
-        {
-            return Startup.ConnectionString;
-        }
-
-        public MyWebRecruitDataBaseContext(DbContextOptions<MyWebRecruitDataBaseContext> options)
-            : base(options)
+        public MyWebRecruitDataBaseContext(DbContextOptions options) : base(options)
         {
         }
 
@@ -35,17 +24,6 @@ namespace MyWebRecruit.Data.Entities
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<XClientContact> XClientContact { get; set; }
         public virtual DbSet<XJobContact> XJobContact { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-
-            if (!optionsBuilder.IsConfigured)
-            {
-                //optionsBuilder.UseSqlServer(connectionString);
-                GetConnectionString();
-
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

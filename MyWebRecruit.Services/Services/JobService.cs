@@ -24,6 +24,11 @@ namespace MyWebRecruit.Services.Services
             return _uow.JobRepository.GetAll().Select(x => x.ToDto()).ToList();
         }
 
+        public JobDto GetJob(int id)
+        {
+            return _uow.JobRepository.GetById(id).ToDto();
+        }
+
         public void CreateJob(JobDto jobDto)
         {
             _uow.JobRepository.Add(jobDto.ToData());

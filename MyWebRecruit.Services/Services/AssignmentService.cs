@@ -24,6 +24,11 @@ namespace MyWebRecruit.Services.Services
             return _uow.AssignmentRepository.GetAll().Select(x => x.ToDto()).ToList();
         }
 
+        public AssignmentDto GetAssignment(int id)
+        {
+            return _uow.AssignmentRepository.GetById(id).ToDto();
+        }
+
         public void CreateAssignment(AssignmentDto assignmentDto)
         {
             _uow.AssignmentRepository.Add(assignmentDto.ToData());

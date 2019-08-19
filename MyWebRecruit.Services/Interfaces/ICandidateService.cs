@@ -9,7 +9,8 @@ namespace MyWebRecruit.Services.Interfaces
 {
     public interface ICandidateService
     {
-        List<CandidateDto> GetCandidateList(UserDto user);
+        List<CandidateDto> GetCandidateList(int userId);
+        CandidateDto GetCandidate(int id);
         void CreateCandidate(CandidateDto candidateDto);
         void UpdateCandidate(CandidateDto candidateDto);
         void DeleteCandidate(int id);

@@ -24,6 +24,11 @@ namespace MyWebRecruit.Services.Services
             return _uow.ContactRepository.GetAll().Select(x => x.ToDto()).ToList();
         }
 
+        public ContactDto GetContact(int id)
+        {
+            return _uow.ContactRepository.GetById(id).ToDto();
+        }
+
         public void ContactCreate(ContactDto contactDto)
         {
             _uow.ContactRepository.Add(contactDto.ToData());

@@ -19,9 +19,16 @@ namespace MyWebRecruit.Services.Services
 
         }
 
-        public List<CandidateDto> GetCandidateList(UserDto user)
+        public List<CandidateDto> GetCandidateList(int userId)
         {
-            return _uow.CandidateRepository.GetAll().Select(x => x.ToDto()).ToList();
+            return _uow.CandidateRepository.GetAll()
+                .Where(x => x.CreatedBy == userId)
+                .Select(x => x.ToDto()).ToList();
+        }
+
+        public CandidateDto GetCandidate(int id)
+        {
+            return _uow.CandidateRepository.GetById(id).ToDto();
         }
 
         public void CreateCandidate(CandidateDto candidateDto)

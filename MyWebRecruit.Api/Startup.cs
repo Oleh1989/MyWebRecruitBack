@@ -8,9 +8,14 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyWebRecruit.Services.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using MyWebRecruit.Data.Entities;
+using MyWebRecruit.Services.Interfaces;
+using MyWebRecruit.Services;
 
 namespace MyWebRecruit.Api
 {
@@ -24,19 +29,27 @@ namespace MyWebRecruit.Api
             Configuration = new ConfigurationBuilder().SetBasePath(environment.ContentRootPath).AddJsonFile("appSettings.json").Build();
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-
         public void ConfigureServices(IServiceCollection services)
         {
+            Mapper.Initialize(cfg => cfg.AddMaps(new[]
+            {
+                typeof(Startup).Assembly
+            }));
+
+            services.AddDbContext<MyWebRecruitDataBaseContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<ICandidateService, CandidateService>();
+            services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IJobService, JobService>();
+            services.AddScoped<IAssignmentService, AssignmentService>();
             services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            ConnectionString = Configuration["ConnectionStrings:DefaultConnection"];
-
-
+        {        
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

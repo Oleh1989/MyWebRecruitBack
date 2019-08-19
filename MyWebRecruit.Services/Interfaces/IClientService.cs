@@ -9,7 +9,8 @@ namespace MyWebRecruit.Services.Interfaces
 {
     public interface IClientService
     {
-        List<ClientDto> GetClientList(UserDto user);
+        List<ClientDto> GetClientList(int userId);
+        ClientDto GetClient(int id);
         void CreateClient(ClientDto clientDto);
         void UpdateClient(ClientDto clientDto);
         void DeleteClient(int id);

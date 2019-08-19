@@ -10,6 +10,7 @@ namespace MyWebRecruit.Services.Interfaces
     public interface IUserService
     {
         List<UserDto> GetUserList();
+        UserDto GetUser(int id);
         void CreateUser(UserDto userDto);
         void UpdateUser(UserDto userDto);
         void DeleteUser(int id);

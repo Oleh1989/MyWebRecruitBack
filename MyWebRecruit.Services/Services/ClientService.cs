@@ -12,16 +12,23 @@ using MyWebRecruit.Data.UnitOfWorks;
 
 namespace MyWebRecruit.Services.Services
 {
-    class ClientService : BaseService, IClientService
+    public class ClientService : BaseService, IClientService
     {
         public ClientService(IUnitOfWork uow) : base(uow)
         {
 
         }
 
-        public List<ClientDto> GetClientList(UserDto user)
+        public List<ClientDto> GetClientList(int userId)
         {
-            return _uow.ClientRepository.GetAll().Select(x => x.ToDto()).ToList();
+            return _uow.ClientRepository.GetAll().
+                Where(x => x.CreatedBy == userId)
+                .Select(x => x.ToDto()).ToList();
+        }
+
+        public ClientDto GetClient(int id)
+        {
+            return _uow.ClientRepository.GetById(id).ToDto();
         }
 
         public void CreateClient(ClientDto clientDto)

@@ -13,6 +13,7 @@ namespace MyWebRecruit.Data.UnitOfWorks
         IRepository<Assignment> AssignmentRepository { get; }
         IRepository<Contact> ContactRepository { get; }
         IRepository<JobGeneral> JobRepository { get; }
+        IRepository<User> UserRepository { get; }
         void Save();
     }
 }

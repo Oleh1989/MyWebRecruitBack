@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using MyWebRecruit.Data.Repositories;
-using MyWebRecruit.Api;
-
 
 namespace MyWebRecruit.Data.UnitOfWorks
 {

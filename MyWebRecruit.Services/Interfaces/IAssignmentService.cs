@@ -10,6 +10,7 @@ namespace MyWebRecruit.Services.Interfaces
     public interface IAssignmentService
     {
         List<AssignmentDto> GetAssignmentList();
+        AssignmentDto GetAssignment(int id);
         void CreateAssignment(AssignmentDto assignmentDto);
         void UpdateAssignment(AssignmentDto assignmentDto);
         void DeleteAssignment(int id);

@@ -13,7 +13,7 @@ using MyWebRecruit.Data.UnitOfWorks;
 
 namespace MyWebRecruit.Services
 {
-    class UserService : BaseService, IUserService
+    public class UserService : BaseService, IUserService
     {
         public UserService(IUnitOfWork uow) : base(uow)
         {
@@ -23,6 +23,11 @@ namespace MyWebRecruit.Services
         public List<UserDto> GetUserList()
         {
             return _uow.UserRepository.GetAll().Select(x => x.ToDto()).ToList();
+        }
+
+        public UserDto GetUser(int id)
+        {
+            return _uow.UserRepository.GetById(id).ToDto();
         }
 
         public void CreateUser(UserDto userDto)

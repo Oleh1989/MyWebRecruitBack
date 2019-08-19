@@ -15,6 +15,10 @@ namespace MyWebRecruit.Services.Entities
         public string JobName { get; set; }
         public string ReasonLeave { get; set; }
         public int CandId { get; set; }
-        public int JobId { get; set; }
+        public string JobAddressLine { get; set; }
+        public string JobAddressCity { get; set; }
+        public string JobAddressIndex { get; set; }
+        public string Country { get; set; }
+        public int JobId { get; internal set; }
     }
 }
